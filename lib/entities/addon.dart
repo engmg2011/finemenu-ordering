@@ -1,5 +1,3 @@
-
-
 import 'package:finemenu/entities/locale.dart';
 
 class Addon {
@@ -9,14 +7,13 @@ class Addon {
   bool multiple;
   List<Locale> locales = [];
 
-
-  Addon.fromJson(Map<String, dynamic> json):
-        id = json['id'],
+  Addon.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
         price = json['price'] ?? 0,
         max = json['max'] ?? 0,
-        multiple = json['multiple'] == 1
-  {
-    json['locales'].forEach((dynamic locale) => {locales.add(Locale.fromJson(locale))});
+        multiple = json['multiple'] == 1 {
+    json['locales']
+        .forEach((dynamic locale) => {locales.add(Locale.fromJson(locale))});
   }
 
   Map<String, dynamic> toJson() => {

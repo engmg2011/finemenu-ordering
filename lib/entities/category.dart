@@ -1,5 +1,3 @@
-
-
 import 'package:finemenu/entities/item.dart';
 import 'package:finemenu/entities/locale.dart';
 import 'package:finemenu/entities/media.dart';
@@ -23,9 +21,11 @@ class Category {
         restaurant_id = json['restaurant_id'],
         parent_id = json['parent_id'],
         user_id = json['user_id'],
-        sort = json['sort']{
-    json['locales'].forEach((dynamic locale) => {locales.add(Locale.fromJson(locale))});
-    json['media'].forEach((dynamic mediaObj) => {media.add(Media.fromJson(mediaObj))});
+        sort = json['sort'] {
+    json['locales']
+        .forEach((dynamic locale) => {locales.add(Locale.fromJson(locale))});
+    json['media']
+        .forEach((dynamic mediaObj) => {media.add(Media.fromJson(mediaObj))});
     json['items'].forEach((dynamic item) => {items.add(Item.fromJson(item))});
   }
 
