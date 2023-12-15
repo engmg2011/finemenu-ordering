@@ -1,6 +1,6 @@
-import 'package:finemenu/entities/item.dart';
-import 'package:finemenu/entities/locale.dart';
-import 'package:finemenu/entities/media.dart';
+import 'package:finemenu/models/item.dart';
+import 'package:finemenu/models/locale.dart';
+import 'package:finemenu/models/media.dart';
 
 class Category {
   int id;

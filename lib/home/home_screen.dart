@@ -1,8 +1,6 @@
-import 'package:finemenu/cubit/home_cubit/home_cubit.dart';
-import 'package:finemenu/cubit/home_cubit/home_state.dart';
-import 'package:finemenu/widgets/dropdownbutton_view.dart';
+
+import 'package:finemenu/home/view/widgets/dropdownbutton_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

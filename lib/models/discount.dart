@@ -1,5 +1,4 @@
-
-import 'package:finemenu/entities/locale.dart';
+import 'package:finemenu/models/locale.dart';
 
 class Discount {
   int id;

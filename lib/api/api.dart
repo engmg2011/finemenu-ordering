@@ -1,25 +1,21 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:finemenu/config/config.dart';
+import 'package:finemenu/constant/end_points.dart';
 import 'package:flutter/foundation.dart';
 
 class Api {
-  late Dio dio;
-  Future<dynamic> get({required String url, @required String? token}) async {
-    Map<String, String> headers = {};
+  late final Dio _dio;
 
-    if (token != null) {
-      headers.addAll({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'authorization': 'Bearer $BearerToken'
-      });
-    }
-    Response response = await dio.get(url, options: Options(headers: headers));
+  Future<dynamic> get(
+      {required String endPoint, @required String? token}) async {
+    Response response = await _dio.get(endPoint,
+        options: Options(headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'authorization': 'Bearer ${AppEndPoints.bearerToken}'
+        }));
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.data);
+      return (response.data);
     } else {
       throw Exception(
           'there is a problem with status code ${response.statusCode}');
@@ -27,60 +23,77 @@ class Api {
   }
 
   Future<dynamic> post(
-      {required String url,
-      @required dynamic body,
+      {required String endPoint,
+      @required dynamic data,
       @required String? token}) async {
-    Map<String, String> headers = {};
-
-    if (token != null) {
-      headers.addAll({
+    Response response = await _dio.post(
+      endPoint,
+      data: data,
+      options: Options(headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': 'Bearer $BearerToken'
-      });
-    }
-    Response response = await dio.post(
-      url,
-      data: body,
-      options: Options(headers: headers),
+        'authorization': 'Bearer ${AppEndPoints.bearerToken}'
+      }),
     );
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.data);
-
-      return data;
+      return response.data;
     } else {
       throw Exception(
-          'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.data)}');
+          'there is a problem with status code ${response.statusCode} with body ${response.data}');
     }
   }
 
   Future<dynamic> put(
-      {required String url,
-      @required dynamic body,
+      {required String endPoint,
+      @required dynamic data,
       @required String? token}) async {
-    Map<String, String> headers = {};
-    headers.addAll({'Content-Type': 'application/x-www-form-urlencoded'});
-    if (token != null) {
-      headers.addAll({
+    Response response = await _dio.put(
+      endPoint,
+      data: data,
+      options: Options(headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'authorization': 'Bearer $BearerToken'
-      });
-    }
-
-    print('url = $url body = $body token = $token ');
-    Response response = await dio.put(
-      url,
-      data: body,
-      options: Options(headers: headers),
+        'authorization': 'Bearer ${AppEndPoints.bearerToken}'
+      }),
     );
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.data);
-      print(data);
-      return data;
+      return response.data;
     } else {
       throw Exception(
-          'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.data)}');
+          'there is a problem with status code ${response.statusCode} with body ${response.data}');
+    }
+  }
+
+  Future<dynamic> patch(
+      {required String endPoint, dynamic data, String? token}) async {
+    Response response = await _dio.patch(endPoint,
+        data: data,
+        options: Options(headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'authorization': 'Bearer ${AppEndPoints.bearerToken}'
+        }));
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception(
+          'there is a problem with status code ${response.statusCode} with body ${response.data}');
+    }
+  }
+
+  Future<dynamic> delete({required String endPoint, String? token}) async {
+    Response response = await _dio.delete(endPoint,
+        options: Options(headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'authorization': 'Bearer ${AppEndPoints.bearerToken}'
+        }));
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception(
+          'there is a problem with status code ${response.statusCode} with body ${response.data}');
     }
   }
 }
+

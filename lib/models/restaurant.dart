@@ -1,8 +1,7 @@
 
 
-
-import 'package:finemenu/entities/media.dart';
-import 'package:finemenu/entities/setting.dart';
+import 'package:finemenu/models/media.dart';
+import 'package:finemenu/models/setting.dart';
 
 class Restaurant {
   int? id;

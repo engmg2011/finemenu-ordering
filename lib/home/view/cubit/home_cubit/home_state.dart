@@ -1,13 +1,12 @@
-import 'package:finemenu/entities/category.dart';
-import 'package:finemenu/entities/item.dart';
-import 'package:finemenu/entities/order.dart';
-import 'package:finemenu/entities/restaurant.dart';
+
+import 'package:finemenu/models/category.dart';
+import 'package:finemenu/models/item.dart';
+import 'package:finemenu/models/order.dart';
+import 'package:finemenu/models/restaurant.dart';
 
 abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
-
-
 ////////////////////////////////////////////////////////////////
 class SetStoreCategoriesLoadingState extends HomeState {}
 

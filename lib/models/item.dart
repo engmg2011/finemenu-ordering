@@ -1,10 +1,10 @@
 
 
-import 'package:finemenu/entities/addon.dart';
-import 'package:finemenu/entities/discount.dart';
-import 'package:finemenu/entities/locale.dart';
-import 'package:finemenu/entities/media.dart';
-import 'package:finemenu/entities/price.dart';
+import 'package:finemenu/models/addon.dart';
+import 'package:finemenu/models/discount.dart';
+import 'package:finemenu/models/locale.dart';
+import 'package:finemenu/models/media.dart';
+import 'package:finemenu/models/price.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()

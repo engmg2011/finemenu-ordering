@@ -1,4 +1,4 @@
-import 'package:finemenu/entities/price.dart';
+import 'package:finemenu/models/price.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'addon.dart';
 import 'discount.dart';

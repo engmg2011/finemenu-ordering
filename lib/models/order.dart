@@ -1,5 +1,5 @@
-import 'package:finemenu/entities/order_line.dart';
-import 'package:finemenu/entities/price.dart';
+import 'package:finemenu/models/order_line.dart';
+import 'package:finemenu/models/price.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 

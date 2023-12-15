@@ -1,4 +1,4 @@
-import 'package:finemenu/entities/media.dart';
+import 'package:finemenu/models/media.dart';
 import 'package:flutter/material.dart';
 
 Color getColorFromHex(String hexColor) {
