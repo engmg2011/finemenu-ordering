@@ -1,4 +1,5 @@
 
+import 'package:finemenu/api/services/get_restaurant_data.dart';
 import 'package:finemenu/home/view/widgets/dropdownbutton_view.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,8 @@ class HomeScreen extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 print(selectedRestaurantItem!.name);
+                GetRestaurantData.getData(selectedRestaurantItem!.id);
+
               },
               child: const Text(
                 "Open",

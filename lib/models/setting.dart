@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:finemenu/helpers/helpers.dart';
 
+
 class Setting {
   Color? primary = const Color.fromRGBO(226, 149, 38, 1.0);
   Color? accent = const Color.fromRGBO(249, 57, 55, 1.0);
