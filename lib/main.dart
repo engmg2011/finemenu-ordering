@@ -1,4 +1,5 @@
 import 'package:finemenu/home/home_screen.dart';
+import 'package:finemenu/home/view/fine_menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Fine menu',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: FineMenu(),
     );
   }
 }
