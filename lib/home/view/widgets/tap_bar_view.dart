@@ -1,44 +1,60 @@
-import 'package:finemenu/home/view/widgets/elevatedButton_view.dart';
+import 'package:finemenu/constant/colors.dart';
+import 'package:finemenu/constant/constant.dart';
+import 'package:finemenu/home/view/widgets/custom_icon_view.dart';
 import 'package:flutter/material.dart';
 
-class TapBar extends StatelessWidget {
-  const TapBar({
+class TapBarView extends StatelessWidget {
+  const TapBarView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(5),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          DefaultElevatedButton(
-            text: 'Burger',
-          ),
-          const SizedBox(width: 5),
-          DefaultElevatedButton(
-            text: 'Dessert',
-          ),
-          const SizedBox(width: 5),
-          DefaultElevatedButton(
-            text: 'Drinks',
-          ),
-          const SizedBox(width: 5),
-          DefaultElevatedButton(
-            text: 'Fruits',
-          ),
-          const SizedBox(width: 5),
-          DefaultElevatedButton(
-            text: 'Pizza',
-          ),
-          const SizedBox(width: 5),
-          DefaultElevatedButton(
-            text: 'Sandwiches',
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: Utils.getScreenSize().height * 0.065,
+          width: Utils.getScreenSize().width * 0.115,
+          decoration: BoxDecoration(
+              color: lbackgroundclr, borderRadius: BorderRadius.circular(15)),
+          child: CustomIconView(
+              icon: Icons.menu,
+              ontap: () {
+                Scaffold.of(context).openDrawer();
+              }),
+        ),
+        Column(
+          children: [
+            const Text(
+              "Deliver to",
+              style: TextStyle(
+                  color: whiteclr, fontSize: 17, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: Utils.getScreenSize().height * 0.002,
+            ),
+            const Text(
+              "02-075 Cairo 9",
+              style: TextStyle(
+                color: primaryclr,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
+        Container(
+          height: Utils.getScreenSize().height * 0.065,
+          width: Utils.getScreenSize().width * 0.115,
+          decoration: BoxDecoration(
+              image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU")),
+              color: lbackgroundclr,
+              borderRadius: BorderRadius.circular(15)),
+        ),
+      ],
     );
   }
 }
