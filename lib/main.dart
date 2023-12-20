@@ -1,6 +1,7 @@
 import 'package:finemenu/home/home_screen.dart';
-import 'package:finemenu/home/view/fine_menu.dart';
+import 'package:finemenu/home/view/fine_menu_screen.dart';
 import 'package:finemenu/home/view/item_details_screen.dart';
+import 'package:finemenu/home/view/my_order_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Fine menu',
       debugShowCheckedModeBanner: false,
-      home: DetailScreen(),
+      home: MyOrderScreen(),
     );
   }
 }

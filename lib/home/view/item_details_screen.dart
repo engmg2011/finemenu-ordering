@@ -1,5 +1,7 @@
 import 'package:finemenu/constant/colors.dart';
 import 'package:finemenu/constant/constant.dart';
+import 'package:finemenu/home/view/widgets/choose_additive_item_vew.dart';
+import 'package:finemenu/home/view/widgets/custom_big_button_view.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -53,7 +55,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.010,
                     ),
-
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
@@ -135,165 +136,30 @@ class _DetailScreenState extends State<DetailScreen> {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          height: Utils.getScreenSize().height * 0.080,
-                          width: Utils.getScreenSize().width * 0.15,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/food/creamcheese.png"),
-                              ),
-                              color: Color(0xff3A3843),
-                              shape: BoxShape.circle),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.03,
-                        ),
-                        const Text(
-                          "Cream Cheese",
-                          style: TextStyle(
-                              color: whiteclr,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.22,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "\$${10}",
-                              style: TextStyle(color: whiteclr, fontSize: 16),
-                            ),
-                            Radio(
-                                value: 1,
-                                groupValue: _value,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    _value = value!;
-                                  });
-                                }),
-                          ],
-                        ),
-                      ],
-                    ),
+                    const ChooseAdditiveItemView(
+                        imagePath: "assets/images/food/creamcheese.png",
+                        additiveName: "Burger",
+                        price: 12),
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.015,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          height: Utils.getScreenSize().height * 0.080,
-                          width: Utils.getScreenSize().width * 0.15,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/food/avocado.png"),
-                              ),
-                              color: Color(0xff3A3843),
-                              shape: BoxShape.circle),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.03,
-                        ),
-                        const Text(
-                          "Avocado",
-                          style: TextStyle(
-                              color: whiteclr,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.328,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "\$${11}",
-                              style: TextStyle(color: whiteclr, fontSize: 16),
-                            ),
-                            Radio(
-                                value: 2,
-                                groupValue: _value,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    _value = value!;
-                                  });
-                                }),
-                          ],
-                        ),
-                      ],
-                    ),
+                    const ChooseAdditiveItemView(
+                        imagePath: "assets/images/food/avocado.png",
+                        additiveName: "Avocado",
+                        price: 12),
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.015,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          height: Utils.getScreenSize().height * 0.080,
-                          width: Utils.getScreenSize().width * 0.15,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    "assets/images/food/ice_cream.png"),
-                              ),
-                              color: Color(0xff3A3843),
-                              shape: BoxShape.circle),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.0305,
-                        ),
-                        const Text(
-                          "Tomato",
-                          style: TextStyle(
-                              color: whiteclr,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          width: Utils.getScreenSize().width * 0.35,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "\$${13}",
-                              style: TextStyle(color: whiteclr, fontSize: 16),
-                            ),
-                            Radio(
-                                value: 3,
-                                groupValue: _value,
-                                onChanged: (int? value) {
-                                  setState(() {
-                                    _value = value!;
-                                  });
-                                }),
-                          ],
-                        ),
-                      ],
-                    ),
+                    const ChooseAdditiveItemView(
+                        imagePath: "assets/images/food/ice_cream.png",
+                        additiveName: "Tomato",
+                        price: 12),
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.015,
                     ),
-                    Center(
-                      child: Container(
-                        height: Utils.getScreenSize().height * 0.06,
-                        width: Utils.getScreenSize().width * 0.75,
-                        decoration: BoxDecoration(
-                          color: primaryclr,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Add to card",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: whiteclr,
-                            ),
-                          ),
-                        ),
+                    const Center(
+                      child: CustomBigButton(
+                        textName: 'Add to card',
                       ),
                     ),
                   ],
