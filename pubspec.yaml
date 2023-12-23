@@ -42,6 +42,7 @@ dependencies:
   flutter_staggered_grid_view:
   json_annotation: ^4.8.1
   dio: ^5.4.0
+  dartz: ^0.10.0
 
 
 dev_dependencies:

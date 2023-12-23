@@ -1,7 +1,13 @@
-
-import 'package:finemenu/api/services/get_restaurant_data.dart';
-import 'package:finemenu/home/view/widgets/dropdownbutton_view.dart';
+import 'package:finemenu/core/service/api_service.dart';
+import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
+import 'package:finemenu/features/webapp/view/widgets/dropdownbutton_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../core/service/service_locator.dart';
+import '../features/webapp/data/data_source/webapp_remote_data_source.dart';
+import '../features/webapp/data/repositories/webapp_repository.dart';
+import '../features/webapp/view/cubit/home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,19 +30,32 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          ElevatedButton(
-              onPressed: () {
-                print(selectedRestaurantItem!.name);
-                GetRestaurantData.getData(selectedRestaurantItem!.id);
-
+          BlocProvider(
+            create: (context) {
+              return HomeCubit(WebAppRepository(
+                  WebAppRemoteDataSource(apiService: ApiService(dioSetUp()))));
+            },
+            child: BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {
+                // TODO: implement listener
               },
-              child: const Text(
-                "Open",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+              builder: (context, state) {
+                final cubit = context.read<HomeCubit>();
+                return ElevatedButton(
+                    onPressed: () {
+                      print(selectedRestaurantItem!.name);
+                      cubit.getData(selectedRestaurantItem!.id);
+                    },
+                    child: const Text(
+                      "Open",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ));
+              },
+            ),
+          ),
         ],
       ),
     );
