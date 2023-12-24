@@ -2,21 +2,16 @@ import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
 import 'package:flutter/material.dart';
 
-class ChooseAdditiveItemView extends StatefulWidget {
+class ChooseAdditiveItemView extends StatelessWidget {
   const ChooseAdditiveItemView(
       {super.key,
       required this.imagePath,
       required this.additiveName,
-      this.price});
+      required this.price});
   final String imagePath;
   final String additiveName;
-  final price;
+  final num price;
 
-  @override
-  State<ChooseAdditiveItemView> createState() => _ChooseAdditiveItemViewState();
-}
-
-class _ChooseAdditiveItemViewState extends State<ChooseAdditiveItemView> {
   @override
   Widget build(BuildContext context) {
     int? value = 1;
@@ -26,18 +21,19 @@ class _ChooseAdditiveItemViewState extends State<ChooseAdditiveItemView> {
           height: Utils.getScreenSize().height * 0.080,
           width: Utils.getScreenSize().width * 0.15,
           decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(widget.imagePath),
-              ),
-              color: const Color(0xff3A3843),
-              shape: BoxShape.circle),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+            color: const Color(0xff3A3843),
+          ),
         ),
         SizedBox(
           width: Utils.getScreenSize().width * 0.03,
         ),
         Text(
-          widget.additiveName,
+          additiveName,
           style: const TextStyle(
               color: whiteclr, fontSize: 16, fontWeight: FontWeight.w500),
         ),
@@ -47,17 +43,10 @@ class _ChooseAdditiveItemViewState extends State<ChooseAdditiveItemView> {
         Row(
           children: [
             Text(
-              "\$${widget.price}",
+              "\$${price}",
               style: const TextStyle(color: whiteclr, fontSize: 16),
             ),
-            Radio(
-                value: 1,
-                groupValue: value,
-                onChanged: (int? value) {
-                  setState(() {
-                    value = value!;
-                  });
-                }),
+            Radio(value: 1, groupValue: value, onChanged: (int? value) {}),
           ],
         ),
       ],

@@ -1,21 +1,19 @@
 import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
+import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
 import 'package:finemenu/features/webapp/view/widgets/category_list_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_icon_view.dart';
+import 'package:finemenu/features/webapp/view/widgets/details_item_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/drawer_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/list_item_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/search_form_field_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/tap_bar_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FineMenuScreen extends StatefulWidget {
+class FineMenuScreen extends StatelessWidget {
   const FineMenuScreen({super.key});
 
-  @override
-  State<FineMenuScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<FineMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,23 +52,50 @@ class _HomeScreenState extends State<FineMenuScreen> {
                   SizedBox(
                     height: Utils.getScreenSize().height * 0.027,
                   ),
-                  const CategoryListView(),
+                  CategoryListView(),
                 ],
               ),
             ),
           ),
-          SliverFillRemaining(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: ListItemView(),
-                );
-              },
-            ),
+          BlocConsumer(
+            builder: (context, state) {
+              final cubit = context.read<HomeCubit>();
+
+              return SliverFillRemaining(
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemCount: cubit.itemModel.locales.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: InkWell(
+                        child: ListItemView(
+                          imageUrl: 'assets/images/food/noodles.png',
+                          text: cubit.itemModel.locales[0].name,
+                          description: cubit.itemModel.locales[0].description,
+                          price: cubit.lowestPriceModel.price,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailsItemView(
+                                        imagePath:
+                                            'assets/images/food/noodles.png',
+                                        itemName: 'Noodles',
+                                        itemDescription:
+                                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nunc vitae tortor aliquam aliquet. ',
+                                        itemPrice: '5.00',
+                                      )));
+                        },
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+            listener: (context, state) {},
           )
         ],
       ),
@@ -78,3 +103,6 @@ class _HomeScreenState extends State<FineMenuScreen> {
     );
   }
 }
+
+// asset(_item.media[0].src,)
+//_item.locales[0].name,

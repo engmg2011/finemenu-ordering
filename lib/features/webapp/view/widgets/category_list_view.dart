@@ -1,9 +1,10 @@
 import 'package:finemenu/core/constant/constant.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/view/widgets/category_item_view.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListView extends StatelessWidget {
-  const CategoryListView({
+  CategoryListView({
     super.key,
   });
 
@@ -14,9 +15,12 @@ class CategoryListView extends StatelessWidget {
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: 12,
+        itemCount: data.length,
         itemBuilder: ((context, index) {
-          return const CategoryItemView();
+          return CategoryItemView(
+            imageUrl: data[index].imageUrl,
+            text: data[index].text,
+          );
         }),
       ),
     );

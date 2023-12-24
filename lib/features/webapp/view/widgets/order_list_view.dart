@@ -3,43 +3,62 @@ import 'package:finemenu/features/webapp/view/widgets/custom_item_image_view.dar
 import 'package:flutter/material.dart';
 
 class OrderListView extends StatelessWidget {
-  const OrderListView({super.key});
-
+  const OrderListView(
+      {super.key,
+      required this.imageUrl,
+      required this.itemName,
+      required this.itemPrice});
+  final String imageUrl;
+  final String itemName;
+  final num itemPrice;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.width * .4,
-      child: Row(
-        children: [
-          const CustomItemImage(imageUrl: 'assets/images/food/noodles.png'),
-          const SizedBox(
-            width: 30,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      height: MediaQuery.of(context).size.width * .3,
+      margin: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: lbackgroundclr,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomItemImage(imageUrl: imageUrl),
+            const SizedBox(
+              width: 12,
+            ),
+            Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .5,
-                  child: const Text(
-                    'Beef Burger',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 18, color: whiteclr),
+                Text(
+                  itemName,
+                  style: const TextStyle(
+                    color: whiteclr,
+                    fontSize: 18,
                   ),
                 ),
                 const SizedBox(
-                  height: 3,
+                  height: 5,
                 ),
-                const Text(
-                  '10 KDW',
-                  style: TextStyle(color: whiteclr),
+                Text(
+                  "$itemPrice X 2 KWD",
+                  style: const TextStyle(
+                    color: whiteclr,
+                    fontSize: 22,
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+            Spacer(),
+            const Icon(
+              Icons.delete_outline,
+              color: primaryclr,
+            )
+          ],
+        ),
       ),
     );
   }

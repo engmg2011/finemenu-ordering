@@ -17,9 +17,8 @@ class CustomIconView extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: IconButton(
-        icon: Icon(icon),
+        icon: Icon(icon, color: whiteclr),
         onPressed: ontap,
-        color: whiteclr,
       ),
     );
   }

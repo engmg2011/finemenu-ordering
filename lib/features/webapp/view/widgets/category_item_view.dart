@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 class CategoryItemView extends StatelessWidget {
   const CategoryItemView({
     super.key,
+    required this.imageUrl,
+    required this.text,
   });
+  final String imageUrl;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +30,18 @@ class CategoryItemView extends StatelessWidget {
                 Container(
                   height: Utils.getScreenSize().height * 0.1,
                   width: Utils.getScreenSize().width * 0.2,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       image: DecorationImage(
                           //  fit: BoxFit.,
-                          image: AssetImage('assets/images/food/burger.png')),
+                          image: AssetImage(imageUrl)),
                       shape: BoxShape.circle),
                 ),
                 SizedBox(
                   height: Utils.getScreenSize().height * 0.015,
                 ),
-                const Text(
-                  'Burger',
-                  style: TextStyle(color: whiteclr),
+                Text(
+                  text,
+                  style: const TextStyle(color: whiteclr),
                 ),
               ],
             ),

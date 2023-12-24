@@ -1,6 +1,6 @@
 import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_big_button_view.dart';
-import 'package:finemenu/features/webapp/view/widgets/custom_item_image_view.dart';
+import 'package:finemenu/features/webapp/view/widgets/order_list_view.dart';
 import 'package:flutter/material.dart';
 
 class MyOrderScreen extends StatefulWidget {
@@ -25,54 +25,16 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
         backgroundColor: backgroundclr,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.width * .3,
-        margin: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: lbackgroundclr,
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomItemImage(imageUrl: 'assets/images/food/noodles.png'),
-              SizedBox(
-                width: 12,
+      body: ListView.separated(
+          itemBuilder: (context, index) => const OrderListView(
+                imageUrl: "assets/images/food/burger.png",
+                itemName: "Chicken Burger",
+                itemPrice: 12.00,
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Burger",
-                    style: TextStyle(
-                      color: whiteclr,
-                      fontSize: 18,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "\$18 X 2",
-                    style: TextStyle(
-                      color: whiteclr,
-                      fontSize: 22,
-                    ),
-                  ),
-                ],
+          separatorBuilder: (context, index) => SizedBox(
+                height: 10,
               ),
-              Spacer(),
-              Icon(
-                Icons.delete_outline,
-                color: primaryclr,
-              )
-            ],
-          ),
-        ),
-      ),
+          itemCount: 2),
       bottomNavigationBar: const CustomBigButton(textName: "CheckOut (10 KWD)"),
     );
   }

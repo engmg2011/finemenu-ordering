@@ -4,7 +4,16 @@ import 'package:finemenu/features/webapp/view/widgets/custom_text_button_view.da
 import 'package:flutter/material.dart';
 
 class ListItemView extends StatelessWidget {
-  const ListItemView({super.key});
+  const ListItemView(
+      {super.key,
+      required this.imageUrl,
+      required this.text,
+      required this.description,
+      required this.price});
+  final String imageUrl;
+  final String text;
+  final String description;
+  final num price;
 
 //assets/images/food/noodles.png'
   @override
@@ -13,7 +22,7 @@ class ListItemView extends StatelessWidget {
       height: MediaQuery.of(context).size.width * .4,
       child: Row(
         children: [
-          const CustomItemImage(imageUrl: 'assets/images/food/noodles.png'),
+          CustomItemImage(imageUrl: imageUrl),
           const SizedBox(
             width: 30,
           ),
@@ -24,27 +33,27 @@ class ListItemView extends StatelessWidget {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
-                  child: const Text(
-                    'Beef Burger',
+                  child: Text(
+                    text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 18, color: whiteclr),
+                    style: const TextStyle(fontSize: 18, color: whiteclr),
                   ),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
-                  child: const Text(
-                    'Bacon burger with cheese to tasty',
+                  child: Text(
+                    description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                    style: const TextStyle(fontSize: 15, color: Colors.grey),
                   ),
                 ),
                 const SizedBox(
                   height: 3,
                 ),
-                const Text(
-                  'Starts from : 10 KDW',
+                Text(
+                  'Starts from : $price',
                   style: TextStyle(color: whiteclr),
                 ),
                 const SizedBox(
