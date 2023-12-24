@@ -15,8 +15,9 @@ class HomeCubit extends Cubit<HomeState> {
   final BaseWebAppRepository _webAppRepository;
   late Category categoryModel;
   late Item itemModel;
-  late Price lowestPriceModel;
-  late Setting _themeColors;
+  late Price lowestPrice;
+
+
 //_item.media[0].src
   void getCategoriesData() async {
     emit(GetCategoriesDataLoadingState());
@@ -44,6 +45,11 @@ class HomeCubit extends Cubit<HomeState> {
     return categoriesObjs;
   }
 
+
+  final List<Item> itemsObjs = [];
+  late List<Category> categories;
+  late Restaurant restaurant;
+
   Future<void> getData(int id) async {
     emit(GetDataLoadingState());
 
@@ -52,11 +58,11 @@ class HomeCubit extends Cubit<HomeState> {
     menu.fold(
       (failure) => emit(GetDataFailureState(failure)),
       (Map<String, dynamic> menuData) {
-        final List<Category> categories = categoriesList(menuData);
+        categories = categoriesList(menuData);
 
         emit(GetDataCategorySuccessState(categories));
 
-        Restaurant restaurant = Restaurant.fromJson({
+        restaurant = Restaurant.fromJson({
           'id': id,
           'name': 'name',
           'media': menuData['media'],
@@ -65,10 +71,23 @@ class HomeCubit extends Cubit<HomeState> {
 
         emit(GetDataRestaurantSuccessState(restaurant));
 
-        final List<Item> itemsObjs = [];
+
         categories.forEach(
           (category) => category.items.forEach((item) => itemsObjs.add(item)),
         );
+
+        getItemsData();
+
+        // print("restaurant_id is ===> ${categories[0].restaurant_id}");
+        // print("restaurant_id is ===> ${categories[0].restaurant_id.runtimeType}");
+        // print("categoryId is ===> ${itemsObjs[0].categoryId}");
+        // print("categoryId is ===> ${itemsObjs[0].categoryId.runtimeType}");
+        // print("category Locales length is ===> ${categories[0].items[index].locales[0].name}");
+        // print("ItemsObjs Price length is ===> ${itemsObjs[0].prices.length}");
+
+        // print("Restaruant Data Is  ===> ${restaurant.media[0].src}");
+        // print("Restaruant Data Is  ===> ${restaurant.media[0].src.runtimeType}");
+        print("Length Of The Data Is  ===> ${categories[0].items.length}");
 
         emit(GetDataItemSuccessState(itemsObjs));
       },

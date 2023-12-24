@@ -9,7 +9,7 @@ class CustomItemImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: AspectRatio(
         aspectRatio: 2.6 / 4,
-        child: Image.asset(imageUrl, fit: BoxFit.fill,),
+        child: Image.network(imageUrl,fit: BoxFit.fill),
         ),
       );
   }

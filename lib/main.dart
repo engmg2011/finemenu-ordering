@@ -1,5 +1,7 @@
 import 'package:finemenu/core/service/api_service.dart';
 import 'package:finemenu/features/webapp/data/data_source/webapp_remote_data_source.dart';
+import 'package:finemenu/features/webapp/view/pages/fine_menu_screen.dart';
+import 'package:finemenu/features/webapp/view/pages/item_details_screen.dart';
 import 'package:finemenu/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

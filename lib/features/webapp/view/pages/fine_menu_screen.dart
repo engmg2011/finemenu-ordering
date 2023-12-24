@@ -1,6 +1,8 @@
 import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
+import 'package:finemenu/core/helpers/helpers.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
+import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
 import 'package:finemenu/features/webapp/view/widgets/category_list_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_icon_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/details_item_view.dart';
@@ -57,46 +59,39 @@ class FineMenuScreen extends StatelessWidget {
               ),
             ),
           ),
-          BlocConsumer(
-            builder: (context, state) {
-              final cubit = context.read<HomeCubit>();
+          BlocBuilder<HomeCubit, HomeState>(
+  builder: (context, state) {
+    final cubit = context.read<HomeCubit>();
+    return SliverFillRemaining(
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              // itemCount: 3,
+              itemCount: cubit.categories[0].items.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: InkWell(
+                    //asset(_item.media[0].src, '0', '200'),
+                    //asset(cubit.itemModel.media[0].src)
+                    child: ListItemView(
+                      imageUrl: 'assets/images/food/noodles.png',
 
-              return SliverFillRemaining(
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: cubit.itemModel.locales.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: InkWell(
-                        child: ListItemView(
-                          imageUrl: 'assets/images/food/noodles.png',
-                          text: cubit.itemModel.locales[0].name,
-                          description: cubit.itemModel.locales[0].description,
-                          price: cubit.lowestPriceModel.price,
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DetailsItemView(
-                                        imagePath:
-                                            'assets/images/food/noodles.png',
-                                        itemName: 'Noodles',
-                                        itemDescription:
-                                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nunc vitae tortor aliquam aliquet. ',
-                                        itemPrice: '5.00',
-                                      )));
-                        },
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-            listener: (context, state) {},
-          )
+                      text: cubit.categories[0].items[index].locales[0].name,
+
+                      description: cubit.categories[0].items[index].locales[0].description,
+                      price:lowestPrice(cubit.itemsObjs[index].prices).price,
+                    ),
+                    onTap: () {
+
+                    },
+                  ),
+                );
+              },
+            ),
+          );
+  },
+)
         ],
       ),
       drawer: DrawerView(),

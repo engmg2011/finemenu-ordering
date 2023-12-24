@@ -1,4 +1,5 @@
 import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
+import 'package:finemenu/features/webapp/view/pages/fine_menu_screen.dart';
 import 'package:finemenu/features/webapp/view/widgets/dropdownbutton_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   Widget build(BuildContext context) {
+    final cubit = context.read<HomeCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("FineMenu",
@@ -27,19 +29,26 @@ class HomeScreen extends StatelessWidget {
             height: 40,
           ),
           BlocConsumer<HomeCubit, HomeState>(
+
             listener: (context, state) {
-              // TODO: implement listener
+              if(state is GetDataLoadingState){
+                Center(child: CircularProgressIndicator());
+              }
+             else if(state is GetDataItemSuccessState){
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FineMenuScreen()));
+              }
             },
             builder: (context, state) {
-              final cubit = context.read<HomeCubit>();
+
               return ElevatedButton(
                   onPressed: () {
-                    print(selectedRestaurantItem!.name);
+                    print("Here The Name Of Restaruant ======> ${selectedRestaurantItem!.name}");
                     cubit.getData(selectedRestaurantItem!.id);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => FineMenuScreen()));
+
                   },
                   child: const Text(
                     "Open",
