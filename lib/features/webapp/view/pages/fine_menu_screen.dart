@@ -1,17 +1,17 @@
 import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
-import 'package:finemenu/core/helpers/helpers.dart';
-import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
-import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
-import 'package:finemenu/features/webapp/view/widgets/category_list_view.dart';
+import 'package:finemenu/features/webapp/view/widgets/TabBarView.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_icon_view.dart';
-import 'package:finemenu/features/webapp/view/widgets/details_item_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/drawer_view.dart';
-import 'package:finemenu/features/webapp/view/widgets/list_item_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/search_form_field_view.dart';
 import 'package:finemenu/features/webapp/view/widgets/tap_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/helpers/helpers.dart';
+import '../cubit/home_cubit.dart';
+import '../cubit/home_state.dart';
+import '../widgets/list_item_view.dart';
 
 class FineMenuScreen extends StatelessWidget {
   const FineMenuScreen({super.key});
@@ -54,50 +54,296 @@ class FineMenuScreen extends StatelessWidget {
                   SizedBox(
                     height: Utils.getScreenSize().height * 0.027,
                   ),
-                  CategoryListView(),
+                  TabBarVieww(),
                 ],
               ),
             ),
           ),
-          BlocBuilder<HomeCubit, HomeState>(
-  builder: (context, state) {
-    final cubit = context.read<HomeCubit>();
-    return SliverFillRemaining(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              // itemCount: 3,
-              itemCount: cubit.categories[0].items.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: InkWell(
-                    //asset(_item.media[0].src, '0', '200'),
-                    //asset(cubit.itemModel.media[0].src)
-                    child: ListItemView(
-                      imageUrl: 'assets/images/food/noodles.png',
-
-                      text: cubit.categories[0].items[index].locales[0].name,
-
-                      description: cubit.categories[0].items[index].locales[0].description,
-                      price:lowestPrice(cubit.itemsObjs[index].prices).price,
-                    ),
-                    onTap: () {
-
-                    },
-                  ),
-                );
-              },
-            ),
-          );
-  },
-)
+          BlocConsumer<HomeCubit, HomeState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              final cubit = context.read<HomeCubit>();
+              return TabBarView(controller: cubit.tabController, children: [
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  // itemCount: 3,
+                  itemCount: cubit.categoriesssssList[0].items!.length,
+                  //cubit.categories[1].items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      //asset(_item.media[0].src, '0', '200'),
+                      //asset(cubit.itemModel.media[0].src)
+                      child: ListItemView(
+                        imageUrl: asset(cubit
+                            .categoriesssssList[0].items![index].media![0].src
+                            .toString()),
+                        text: cubit.categoriesssssList[0].items![index]
+                            .locales![0].name
+                            .toString(),
+                        description: (cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    null ||
+                                cubit.categoriesssssList[0].items![index]
+                                        .locales![0].description
+                                        .toString() ==
+                                    "")
+                            ? "No Description"
+                            : cubit.categoriesssssList[0].items![index]
+                                .locales![0].description
+                                .toString(),
+                        price: lowestPrice(cubit
+                                .categoriesssssList[0].items![index].prices!)
+                            .price!,
+                      ),
+                    );
+                  },
+                ),
+              ]);
+            },
+          )
         ],
       ),
       drawer: DrawerView(),
     );
   }
 }
-
+//TabBarView
+//lowestPrice(cubit.categoriesssssList[0].items![index].prices!).price!
 // asset(_item.media[0].src,)
 //_item.locales[0].name,
+
+//SliverFillRemaining(

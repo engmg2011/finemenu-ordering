@@ -29,26 +29,20 @@ class HomeScreen extends StatelessWidget {
             height: 40,
           ),
           BlocConsumer<HomeCubit, HomeState>(
-
             listener: (context, state) {
-              if(state is GetDataLoadingState){
+              if (state is GetDataLoadingState) {
                 Center(child: CircularProgressIndicator());
-              }
-             else if(state is GetDataItemSuccessState){
-
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FineMenuScreen()));
+              } else if (state is GetDataCategorySuccessState) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FineMenuScreen()));
               }
             },
             builder: (context, state) {
-
               return ElevatedButton(
                   onPressed: () {
-                    print("Here The Name Of Restaruant ======> ${selectedRestaurantItem!.name}");
+                    print(
+                        "Here The Name Of Restaruant ======> ${selectedRestaurantItem!.name}");
                     cubit.getData(selectedRestaurantItem!.id);
-
                   },
                   child: const Text(
                     "Open",

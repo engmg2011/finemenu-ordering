@@ -1,8 +1,7 @@
 import 'package:finemenu/features/webapp/data/models/category.dart';
-import 'package:finemenu/features/webapp/data/models/restaurant.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../../data/models/item.dart';
 
 abstract class HomeState {}
 
@@ -19,11 +18,12 @@ class GetCategoriesDataFailureState extends HomeState {
   final Failure failure;
   GetCategoriesDataFailureState(this.failure);
 }
+
 //////////////////////////////////////////////////////////
 class GetItemsDataLoadingState extends HomeState {}
 
 class GetItemsDataSuccessState extends HomeState {
-  final Item item;
+  final ItemModel item;
   GetItemsDataSuccessState(this.item);
 }
 
@@ -31,21 +31,23 @@ class GetItemsDataFailureState extends HomeState {
   final Failure failure;
   GetItemsDataFailureState(this.failure);
 }
+
 ////////////////////////////////////////////////////////////////
 class GetDataLoadingState extends HomeState {}
 
 class GetDataCategorySuccessState extends HomeState {
-  final List<Category> category;
-  GetDataCategorySuccessState(this.category);
+  GetDataCategorySuccessState();
 }
+
 class GetDataRestaurantSuccessState extends HomeState {
-  final Restaurant restaurant;
-  GetDataRestaurantSuccessState(this.restaurant);
+  GetDataRestaurantSuccessState();
 }
+
 class GetDataItemSuccessState extends HomeState {
-  final List<Item> item;
+  final List<ItemModel> item;
   GetDataItemSuccessState(this.item);
 }
+
 class GetDataFailureState extends HomeState {
   final Failure failure;
   GetDataFailureState(this.failure);

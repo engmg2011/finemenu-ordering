@@ -1,4 +1,4 @@
-import 'package:finemenu/features/webapp/data/models/media.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/setting.dart';
 
 class Restaurant {

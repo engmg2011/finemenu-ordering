@@ -3,9 +3,10 @@ import 'package:finemenu/core/constant/end_points.dart';
 import 'package:finemenu/core/service/api_service.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
 import 'package:finemenu/features/webapp/data/models/category.dart';
-import 'package:finemenu/features/webapp/data/models/item.dart';
 import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:flutter/material.dart';
+
+import '../models/category_model.dart';
 
 class WebAppRemoteDataSource implements BaseWebAppDataSource {
   final ApiService apiService;
@@ -25,11 +26,11 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
   }
 
   @override
-  Future<Item> getItemsData() async {
+  Future<ItemModel> getItemsData() async {
     Response response = await apiService.get(
         endPoint: AppEndPoints.baseUrl + AppEndPoints.item);
     if (response.statusCode == 200) {
-      Item data = Item.fromJson(response.data);
+      ItemModel data = ItemModel.fromJson(response.data);
       return data;
     } else {
       debugPrint('Response ===> ${response.data}');
@@ -52,14 +53,19 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> getRestaurantData(int id) async{
-   Response response = await apiService.get(
-     endPoint: AppEndPoints.baseUrl + AppEndPoints.restaurantWithId(id),);
-   if (response.statusCode == 200) {
-     return response.data;
-   } else {
-     debugPrint('Response ===> ${response.data}');
-     throw Exception();
-   }
+  Future<List<CategoryModel>> getRestaurantData(int id) async {
+    Response response = await apiService.get(
+      endPoint: AppEndPoints.baseUrl + AppEndPoints.restaurantWithId(id),
+    );
+    if (response.statusCode == 200) {
+      List<CategoryModel> categories = List<CategoryModel>.from(
+          (response.data['categories'] as List)
+              .map((e) => CategoryModel.fromJson(e)));
+
+      return categories;
+    } else {
+      debugPrint('Response ===> ${response.data}');
+      throw Exception();
+    }
   }
 }

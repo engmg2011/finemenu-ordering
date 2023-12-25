@@ -1,6 +1,5 @@
-import 'package:finemenu/features/webapp/data/models/item.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/locale.dart';
-import 'package:finemenu/features/webapp/data/models/media.dart';
 
 class Category {
   int id;
@@ -12,7 +11,7 @@ class Category {
   int? sort;
   List<Locale> locales = [];
   List<Media> media = [];
-  List<Item> items = [];
+  List<ItemModel> items = [];
 
   Category.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -26,7 +25,8 @@ class Category {
         .forEach((dynamic locale) => {locales.add(Locale.fromJson(locale))});
     json['media']
         .forEach((dynamic mediaObj) => {media.add(Media.fromJson(mediaObj))});
-    json['items'].forEach((dynamic item) => {items.add(Item.fromJson(item))});
+    json['items']
+        .forEach((dynamic item) => {items.add(ItemModel.fromJson(item))});
   }
 
   Map<String, dynamic> toJson() => {
@@ -39,6 +39,6 @@ class Category {
         'sort': sort,
         'locales': locales.map((Locale locale) => locale.toJson()).toList(),
         'media': media.map((Media media) => media.toJson()).toList(),
-        'items': items.map((Item item) => item.toJson()).toList(),
+        'items': items.map((ItemModel item) => item.toJson()).toList(),
       };
 }

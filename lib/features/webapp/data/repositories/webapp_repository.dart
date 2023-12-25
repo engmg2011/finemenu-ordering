@@ -3,7 +3,7 @@ import 'package:finemenu/core/errors/failure.dart';
 import 'package:finemenu/core/errors/server_failure.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
 import 'package:finemenu/features/webapp/data/models/category.dart';
-import 'package:finemenu/features/webapp/data/models/item.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/repositories/base_webapp_repository.dart';
 
 class WebAppRepository implements BaseWebAppRepository {
@@ -22,7 +22,7 @@ class WebAppRepository implements BaseWebAppRepository {
   }
 
   @override
-  Future<Either<Failure, Item>> getItemsData() async {
+  Future<Either<Failure, ItemModel>> getItemsData() async {
     try {
       final getItems = await _dataSource.getItemsData();
       return Right(getItems);
@@ -42,8 +42,7 @@ class WebAppRepository implements BaseWebAppRepository {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> getRestaurantData(
-      int id) async {
+  Future<Either<Failure, List<CategoryModel>>> getRestaurantData(int id) async {
     try {
       final getRestaurant = await _dataSource.getRestaurantData(id);
       return Right(getRestaurant);

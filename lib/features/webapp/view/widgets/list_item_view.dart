@@ -19,7 +19,7 @@ class ListItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.width * .4,
+      height: MediaQuery.of(context).size.width * .5,
       child: Row(
         children: [
           CustomItemImage(imageUrl: imageUrl),
@@ -35,7 +35,7 @@ class ListItemView extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .5,
                   child: Text(
                     text,
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 18, color: whiteclr),
                   ),

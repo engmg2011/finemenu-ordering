@@ -1,9 +1,7 @@
-import 'package:finemenu/features/webapp/data/models/addon.dart';
 import 'package:finemenu/features/webapp/data/models/category.dart';
-import 'package:finemenu/features/webapp/data/models/media.dart';
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:finemenu/features/webapp/data/models/order_line.dart';
-import 'package:finemenu/features/webapp/data/models/price.dart';
 import 'package:flutter/material.dart';
 
 Color getColorFromHex(String hexColor) {
@@ -22,9 +20,9 @@ List<Media> mediaBySlug(List<Media> media, String slug) {
   return media.where((Media m) => m.slug == slug).toList();
 }
 
-Price lowestPrice(List<Price> prices) {
-  return prices.reduce(
-      (Price curr, Price next) => curr.price < next.price ? curr : next);
+PriceModel lowestPrice(List<PriceModel> prices) {
+  return prices.reduce((PriceModel curr, PriceModel next) =>
+      curr.price! < next.price! ? curr : next);
 }
 
 String asset(String path) {
@@ -45,7 +43,7 @@ num getOrderLinePrice(OrderLine _orderLine) {
   if (_orderLine.prices.isNotEmpty) {
     num addonsPrice = 0;
     _orderLine.addons.forEach((Addon addon) {
-      addonsPrice += addon.price;
+      addonsPrice += addon.price!;
     });
     price = (_orderLine.prices.first.price + addonsPrice) * _orderLine.count;
   }

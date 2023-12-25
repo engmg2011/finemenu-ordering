@@ -1,9 +1,6 @@
+import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/price.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'addon.dart';
-import 'discount.dart';
-import 'item.dart';
 
 @JsonSerializable()
 class OrderLine {
@@ -11,7 +8,7 @@ class OrderLine {
   int itemId;
   String? note;
   int count;
-  Item item;
+  ItemModel item;
   List<Price> prices = [];
   double? totalPrice;
   List<Addon> addons = [];
@@ -23,7 +20,7 @@ class OrderLine {
         totalPrice = data['totalPrice'],
         note = data['note'],
         count = data['count'],
-        item = Item.fromJson(data['item']) {
+        item = ItemModel.fromJson(data['item']) {
     if (data['discounts'] != null) {
       data['discounts'].forEach(
           (dynamic discount) => {discounts.add(Discount.fromJson(discount))});
