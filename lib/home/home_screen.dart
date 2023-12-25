@@ -31,10 +31,10 @@ class HomeScreen extends StatelessWidget {
           BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {
               if (state is GetDataLoadingState) {
-                Center(child: CircularProgressIndicator());
+                const Center(child: CircularProgressIndicator());
               } else if (state is GetDataCategorySuccessState) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FineMenuScreen()));
+                    MaterialPageRoute(builder: (context) => const FineMenuScreen()));
               }
             },
             builder: (context, state) {

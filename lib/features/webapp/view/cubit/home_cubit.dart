@@ -14,7 +14,6 @@ class HomeCubit extends Cubit<HomeState> {
   late Category categoryModel;
   late ItemModel itemModel;
   Price? lowestPrice;
-  TabController? tabController;
 
 //_item.media[0].src
   void getCategoriesData() async {

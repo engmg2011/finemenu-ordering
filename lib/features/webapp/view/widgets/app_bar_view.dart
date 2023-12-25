@@ -3,8 +3,8 @@ import 'package:finemenu/core/constant/constant.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_icon_view.dart';
 import 'package:flutter/material.dart';
 
-class TapBarView extends StatelessWidget {
-  const TapBarView({
+class AppBarView extends StatelessWidget {
+  const AppBarView({
     super.key,
   });
 
