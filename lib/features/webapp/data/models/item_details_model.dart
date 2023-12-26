@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'category_model.dart';
+
 class ItemDetailsModel {
   final int? id;
   final DateTime? createdAt;
@@ -179,70 +181,7 @@ class Locale {
       };
 }
 
-class Discount {
-  final int? id;
-  final int? discountableId;
-  final String? discountableType;
-  final int? amount;
-  final String? type;
-  final dynamic from;
-  final dynamic to;
-  final int? userId;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final List<Locale>? locales;
 
-  Discount({
-    this.id,
-    this.discountableId,
-    this.discountableType,
-    this.amount,
-    this.type,
-    this.from,
-    this.to,
-    this.userId,
-    this.createdAt,
-    this.updatedAt,
-    this.locales,
-  });
-
-  factory Discount.fromJson(Map<String, dynamic> json) => Discount(
-        id: json["id"],
-        discountableId: json["discountable_id"],
-        discountableType: json["discountable_type"],
-        amount: json["amount"],
-        type: json["type"],
-        from: json["from"],
-        to: json["to"],
-        userId: json["user_id"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        locales: json["locales"] == null
-            ? []
-            : List<Locale>.from(
-                json["locales"]!.map((x) => Locale.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "discountable_id": discountableId,
-        "discountable_type": discountableType,
-        "amount": amount,
-        "type": type,
-        "from": from,
-        "to": to,
-        "user_id": userId,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "locales": locales == null
-            ? []
-            : List<dynamic>.from(locales!.map((x) => x.toJson())),
-      };
-}
 
 class Media {
   final int? id;

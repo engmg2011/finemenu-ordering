@@ -10,11 +10,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/helpers.dart';
 
-class DetailsItemView extends StatelessWidget {
+class DetailsItemView extends StatefulWidget {
   const DetailsItemView({
     super.key,
   });
 
+  @override
+  State<DetailsItemView> createState() => _DetailsItemViewState();
+}
+
+class _DetailsItemViewState extends State<DetailsItemView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -57,60 +62,60 @@ class DetailsItemView extends StatelessWidget {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "200KDW",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: whiteclr),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              height: Utils.getScreenSize().height * 0.050,
-                              width: Utils.getScreenSize().width * 0.08,
-                              decoration: const BoxDecoration(
-                                  color: lbackgroundclr,
-                                  shape: BoxShape.circle),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.remove,
-                                  color: whiteclr,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: Utils.getScreenSize().width * 0.04,
-                            ),
-                            const Text(
-                              "1",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  color: whiteclr,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: Utils.getScreenSize().width * 0.04,
-                            ),
-                            Container(
-                              height: Utils.getScreenSize().height * 0.050,
-                              width: Utils.getScreenSize().width * 0.08,
-                              decoration: const BoxDecoration(
-                                  color: lbackgroundclr,
-                                  shape: BoxShape.circle),
-                              child: const Center(
-                                  child: Icon(
-                                Icons.add,
-                                color: whiteclr,
-                              )),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     const Text(
+                    //       "200KDW",
+                    //       style: TextStyle(
+                    //           fontSize: 22,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: whiteclr),
+                    //     ),
+                    //     // Row(
+                    //     //   children: [
+                    //     //     Container(
+                    //     //       height: Utils.getScreenSize().height * 0.050,
+                    //     //       width: Utils.getScreenSize().width * 0.08,
+                    //     //       decoration: const BoxDecoration(
+                    //     //           color: lbackgroundclr,
+                    //     //           shape: BoxShape.circle),
+                    //     //       child: const Center(
+                    //     //         child: Icon(
+                    //     //           Icons.remove,
+                    //     //           color: whiteclr,
+                    //     //         ),
+                    //     //       ),
+                    //     //     ),
+                    //     //     SizedBox(
+                    //     //       width: Utils.getScreenSize().width * 0.04,
+                    //     //     ),
+                    //     //     const Text(
+                    //     //       "1",
+                    //     //       style: TextStyle(
+                    //     //           fontSize: 22,
+                    //     //           color: whiteclr,
+                    //     //           fontWeight: FontWeight.bold),
+                    //     //     ),
+                    //     //     SizedBox(
+                    //     //       width: Utils.getScreenSize().width * 0.04,
+                    //     //     ),
+                    //     //     Container(
+                    //     //       height: Utils.getScreenSize().height * 0.050,
+                    //     //       width: Utils.getScreenSize().width * 0.08,
+                    //     //       decoration: const BoxDecoration(
+                    //     //           color: lbackgroundclr,
+                    //     //           shape: BoxShape.circle),
+                    //     //       child: const Center(
+                    //     //           child: Icon(
+                    //     //         Icons.add,
+                    //     //         color: whiteclr,
+                    //     //       )),
+                    //     //     )
+                    //     //   ],
+                    //     // )
+                    //   ],
+                    // ),
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.006,
                     ),
@@ -158,26 +163,42 @@ class DetailsItemView extends StatelessWidget {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ChooseAdditiveItemView(
-                            imagePath: "assets/images/food/creamcheese.png",
-                            additiveName: cubit.itemModelDetails.addons![index]
-                                    .locales![0].name
-                                    .toString() ??
-                                "",
-                            price:
-                                cubit.itemModelDetails.addons![index].price ??
-                                    0);
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                          height: Utils.getScreenSize().height * 0.015,
-                        );
-                      },
-                      itemCount: cubit.itemModelDetails.addons!.length,
-                    ),
+                    // Column(
+                    //   children:cubit.itemModelDetails.addons!.map((e){
+                    //     return CheckboxListTile(
+                    //         title: Text(e.price.toString()),
+                    //         value: cubit.countPrice.contains(e),
+                    //         onChanged: (value){
+                    //           setState(() {
+                    //             if(value ==true){
+                    //               cubit.countPrice.remove(e);
+                    //             }else{
+                    //               cubit.countPrice.add(e);
+                    //             }
+                    //           });
+                    //         });
+                    //     }).toList(),
+                    // ),
+                    // ListView.separated(
+                    //   shrinkWrap: true,
+                    //   itemBuilder: (context, index) {
+                    //     return ChooseAdditiveItemView(
+                    //         imagePath: "assets/images/food/creamcheese.png",
+                    //         additiveName: cubit.itemModelDetails.addons![index]
+                    //                 .locales![0].name
+                    //                 .toString() ??
+                    //             "",
+                    //         price:
+                    //             cubit.itemModelDetails.addons![index].price ??
+                    //                 0);
+                    //   },
+                    //   separatorBuilder: (context, index) {
+                    //     return SizedBox(
+                    //       height: Utils.getScreenSize().height * 0.015,
+                    //     );
+                    //   },
+                    //   itemCount: cubit.itemModelDetails.addons!.length,
+                    // ),
                     const Center(
                       child: CustomBigButton(
                         textName: 'Add to card',

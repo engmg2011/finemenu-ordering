@@ -45,8 +45,10 @@ class ChooseAdditiveItemView extends StatelessWidget {
             Text(
               "\$${price}",
               style: const TextStyle(color: whiteclr, fontSize: 16),
-            ),
-            Radio(value: 1, groupValue: value, onChanged: (int? value) {}),
+            ),Checkbox(value: true, onChanged: (value) {
+
+            },)
+            // Radio(value: 1, groupValue: value, onChanged: (int? value) {}),
           ],
         ),
       ],

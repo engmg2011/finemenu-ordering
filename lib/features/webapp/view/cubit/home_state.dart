@@ -1,4 +1,3 @@
-import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 
@@ -11,7 +10,7 @@ class HomeInitial extends HomeState {}
 class GetCategoriesDataLoadingState extends HomeState {}
 
 class GetCategoriesDataSuccessState extends HomeState {
-  final Category categoryModel;
+  final CategoryModel categoryModel;
   GetCategoriesDataSuccessState(this.categoryModel);
 }
 

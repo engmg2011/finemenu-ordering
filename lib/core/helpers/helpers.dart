@@ -1,4 +1,3 @@
-import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:finemenu/features/webapp/data/models/order_line.dart';
@@ -29,31 +28,31 @@ String asset(String path) {
   return path.replaceAll('storage/', 'http://api.finemenu.net/storage/');
 }
 
-getCategory(int categoryId, List<Category> categories) {
-  if (categories.isNotEmpty) {
-    return categories
-        .where((Category element) => element.id == categoryId)
-        .toList()
-        .first;
-  }
-}
+// getCategory(int categoryId, List<Category> categories) {
+//   if (categories.isNotEmpty) {
+//     return categories
+//         .where((Category element) => element.id == categoryId)
+//         .toList()
+//         .first;
+//   }
+// }
 
-num getOrderLinePrice(OrderLine _orderLine) {
-  num price = 0;
-  if (_orderLine.prices.isNotEmpty) {
-    num addonsPrice = 0;
-    _orderLine.addons.forEach((Addon addon) {
-      addonsPrice += addon.price!;
-    });
-    price = (_orderLine.prices.first.price + addonsPrice) * _orderLine.count;
-  }
-  return price;
-}
+// num getOrderLinePrice(OrderLine _orderLine) {
+//   num price = 0;
+//   if (_orderLine.prices.isNotEmpty) {
+//     num addonsPrice = 0;
+//     _orderLine.addons.forEach((Addon addon) {
+//       addonsPrice += addon.price!;
+//     });
+//     price = (_orderLine.prices.first.price + addonsPrice) * _orderLine.count;
+//   }
+//   return price;
+// }
 
-num calculateOrderTotalPrice(Order order) {
-  num totalPrice = 0;
-  order.order_lines.forEach((OrderLine _ol) {
-    totalPrice += getOrderLinePrice(_ol);
-  });
-  return totalPrice;
-}
+// num calculateOrderTotalPrice(Order order) {
+//   num totalPrice = 0;
+//   order.order_lines.forEach((OrderLine _ol) {
+//     totalPrice += getOrderLinePrice(_ol);
+//   });
+//   return totalPrice;
+// }

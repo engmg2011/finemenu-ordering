@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:finemenu/core/errors/failure.dart';
 import 'package:finemenu/core/errors/server_failure.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
-import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/repositories/base_webapp_repository.dart';
@@ -13,7 +12,7 @@ class WebAppRepository implements BaseWebAppRepository {
   WebAppRepository(this._dataSource);
 
   @override
-  Future<Either<Failure, Category>> getCategoriesData() async {
+  Future<Either<Failure, CategoryModel>> getCategoriesData() async {
     try {
       final getCategories = await _dataSource.getCategoriesData();
       return Right(getCategories);
@@ -32,15 +31,15 @@ class WebAppRepository implements BaseWebAppRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, bool>> sendOrder(dynamic order) async {
-    try {
-      final sendOrder = await _dataSource.sendOrder(order);
-      return Right(sendOrder);
-    } on Exception catch (e) {
-      return Left(ServerError(e.toString()));
-    }
-  }
+  // @override
+  // Future<Either<Failure, bool>> sendOrder(dynamic order) async {
+  //   try {
+  //     final sendOrder = await _dataSource.sendOrder(order);
+  //     return Right(sendOrder);
+  //   } on Exception catch (e) {
+  //     return Left(ServerError(e.toString()));
+  //   }
+  // }
 
   @override
   Future<Either<Failure, List<CategoryModel>>> getRestaurantData(int id) async {

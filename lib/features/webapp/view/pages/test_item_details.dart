@@ -31,19 +31,22 @@ class ItemPagePrices extends StatelessWidget {
           selected: !selected,
           label: Column(
             children: [
-              const Text("osama",
+               Text(Size,
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12)),
+              SizedBox(
+                height: 5,
+              ),
               Wrap(
                 children: [
-                  Text(Size,
+                  Text(price.toString(),
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 12)),
-                  Text('$price KWD',
+                  Text(' KWD',
                       style: const TextStyle(
                           color: Colors.white, fontSize: 10, height: 1.4)),
                 ],

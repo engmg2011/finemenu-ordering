@@ -44,8 +44,8 @@ class _TabBarDemoState extends State<TabBarDemo>
             bottom: TabBar(
               controller: _tabController,
               isScrollable: true,
-              tabs: List<Tab>.from(cubit.categoriesssssList.map((index) => Tab(
-                    text: index.locales?[0].name ??
+              tabs: List<Tab>.from(cubit.categoriesssssList.map((e) => Tab(
+                    text: e.locales?[0].name ??
                         '', // Added null-aware operator '?'
                   ))),
             ),

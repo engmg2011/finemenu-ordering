@@ -1,4 +1,3 @@
-import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
 import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/repositories/base_webapp_repository.dart';
@@ -10,15 +9,16 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context) => BlocProvider.of(context);
 
   final BaseWebAppRepository _webAppRepository;
-  late Category categoryModel;
-  late ItemDetailsModel itemModelDetails;
-
+  late CategoryModel categoryModel;
+  late ItemDetailsModel itemModelDetails;   List<ItemDetailsModel> itemModelDetailsList=[];
+ List<ItemDetailsModel> countPrice=[];
 //_item.media[0].src
   void getCategoriesData() async {
     emit(GetCategoriesDataLoadingState());
     var result = await _webAppRepository.getCategoriesData();
     result.fold((l) => emit(GetCategoriesDataFailureState(l)), (r) {
       categoryModel = r;
+
       emit(GetCategoriesDataSuccessState(r));
     });
   }
@@ -32,10 +32,10 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  List<Category> categoriesList(menu) {
-    final List<Category> categoriesObjs = [];
+  List<CategoryModel> categoriesList(menu) {
+    final List<CategoryModel> categoriesObjs = [];
     menu['categories'].forEach((category) {
-      categoriesObjs.add(Category.fromJson(category));
+      categoriesObjs.add(CategoryModel.fromJson(category));
     });
     return categoriesObjs;
   }
