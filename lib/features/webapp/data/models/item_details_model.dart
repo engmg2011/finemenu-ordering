@@ -1,91 +1,19 @@
-// To parse this JSON data, do
-//
-//     final categoryModel = categoryModelFromJson(jsonString);
+import 'dart:convert';
 
-class CategoryModel {
-  final int? id;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final int? restaurantId;
-  final dynamic parentId;
-  final int? userId;
-  final dynamic sort;
-  final List<ItemModel>? items;
-  final List<LocaleElement>? locales;
-  final List<Media>? media;
-
-  CategoryModel({
-    this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.restaurantId,
-    this.parentId,
-    this.userId,
-    this.sort,
-    this.items,
-    this.locales,
-    this.media,
-  });
-
-  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-        id: json["id"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        restaurantId: json["restaurant_id"],
-        parentId: json["parent_id"],
-        userId: json["user_id"],
-        sort: json["sort"],
-        items: json["items"] == null
-            ? []
-            : List<ItemModel>.from(
-                json["items"]!.map((x) => ItemModel.fromJson(x))),
-        locales: json["locales"] == null
-            ? []
-            : List<LocaleElement>.from(
-                json["locales"]!.map((x) => LocaleElement.fromJson(x))),
-        media: json["media"] == null
-            ? []
-            : List<Media>.from(json["media"]!.map((x) => Media.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "restaurant_id": restaurantId,
-        "parent_id": parentId,
-        "user_id": userId,
-        "sort": sort,
-        "items": items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toJson())),
-        "locales": locales == null
-            ? []
-            : List<dynamic>.from(locales!.map((x) => x.toJson())),
-        "media": media == null
-            ? []
-            : List<dynamic>.from(media!.map((x) => x.toJson())),
-      };
-}
-
-class ItemModel {
+class ItemDetailsModel {
   final int? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? categoryId;
   final int? userId;
   final int? sort;
-  final List<LocaleElement>? locales;
-  final List<Addon>? addons;
-  final List<Discount>? discounts;
+  final List<Locale>? locales;
   final List<Media>? media;
-  final List<PriceModel>? prices;
+  final List<Price>? prices;
+  final List<Discount>? discounts;
+  final List<Addon>? addons;
 
-  ItemModel({
+  ItemDetailsModel({
     this.id,
     this.createdAt,
     this.updatedAt,
@@ -93,13 +21,13 @@ class ItemModel {
     this.userId,
     this.sort,
     this.locales,
-    this.addons,
-    this.discounts,
     this.media,
     this.prices,
+    this.discounts,
+    this.addons,
   });
-
-  factory ItemModel.fromJson(Map<String, dynamic> json) => ItemModel(
+  factory ItemDetailsModel.fromJson(Map<String, dynamic> json) =>
+      ItemDetailsModel(
         id: json["id"],
         createdAt: json["created_at"] == null
             ? null
@@ -112,22 +40,21 @@ class ItemModel {
         sort: json["sort"],
         locales: json["locales"] == null
             ? []
-            : List<LocaleElement>.from(
-                json["locales"]!.map((x) => LocaleElement.fromJson(x))),
-        addons: json["addons"] == null
-            ? []
-            : List<Addon>.from(json["addons"]!.map((x) => Addon.fromJson(x))),
-        discounts: json["discounts"] == null
-            ? []
-            : List<Discount>.from(
-                json["discounts"]!.map((x) => Discount.fromJson(x))),
+            : List<Locale>.from(
+                json["locales"]!.map((x) => Locale.fromJson(x))),
         media: json["media"] == null
             ? []
             : List<Media>.from(json["media"]!.map((x) => Media.fromJson(x))),
         prices: json["prices"] == null
             ? []
-            : List<PriceModel>.from(
-                json["prices"]!.map((x) => PriceModel.fromJson(x))),
+            : List<Price>.from(json["prices"]!.map((x) => Price.fromJson(x))),
+        discounts: json["discounts"] == null
+            ? []
+            : List<Discount>.from(
+                json["discounts"]!.map((x) => Discount.fromJson(x))),
+        addons: json["addons"] == null
+            ? []
+            : List<Addon>.from(json["addons"]!.map((x) => Addon.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -140,18 +67,18 @@ class ItemModel {
         "locales": locales == null
             ? []
             : List<dynamic>.from(locales!.map((x) => x.toJson())),
-        "addons": addons == null
-            ? []
-            : List<dynamic>.from(addons!.map((x) => x.toJson())),
-        "discounts": discounts == null
-            ? []
-            : List<dynamic>.from(discounts!.map((x) => x.toJson())),
         "media": media == null
             ? []
             : List<dynamic>.from(media!.map((x) => x.toJson())),
         "prices": prices == null
             ? []
             : List<dynamic>.from(prices!.map((x) => x.toJson())),
+        "discounts": discounts == null
+            ? []
+            : List<dynamic>.from(discounts!.map((x) => x.toJson())),
+        "addons": addons == null
+            ? []
+            : List<dynamic>.from(addons!.map((x) => x.toJson())),
       };
 }
 
@@ -159,15 +86,14 @@ class Addon {
   final int? id;
   final int? addonableId;
   final String? addonableType;
-  final double? price;
+  final int? price;
   final int? multiple;
   final dynamic max;
   final int? userId;
   final dynamic parentId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final List<LocaleElement>? locales;
-  final List<dynamic>? children;
+  final List<Locale>? locales;
 
   Addon({
     this.id,
@@ -181,14 +107,17 @@ class Addon {
     this.createdAt,
     this.updatedAt,
     this.locales,
-    this.children,
   });
+
+  factory Addon.fromRawJson(String str) => Addon.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
 
   factory Addon.fromJson(Map<String, dynamic> json) => Addon(
         id: json["id"],
         addonableId: json["addonable_id"],
         addonableType: json["addonable_type"],
-        price: json["price"]?.toDouble() ?? 0,
+        price: json["price"],
         multiple: json["multiple"],
         max: json["max"],
         userId: json["user_id"],
@@ -201,11 +130,8 @@ class Addon {
             : DateTime.parse(json["updated_at"]),
         locales: json["locales"] == null
             ? []
-            : List<LocaleElement>.from(
-                json["locales"]!.map((x) => LocaleElement.fromJson(x))),
-        children: json["children"] == null
-            ? []
-            : List<dynamic>.from(json["children"]!.map((x) => x)),
+            : List<Locale>.from(
+                json["locales"]!.map((x) => Locale.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -222,56 +148,36 @@ class Addon {
         "locales": locales == null
             ? []
             : List<dynamic>.from(locales!.map((x) => x.toJson())),
-        "children":
-            children == null ? [] : List<dynamic>.from(children!.map((x) => x)),
       };
 }
 
-class LocaleElement {
+class Locale {
   final int? id;
   final String? name;
-  final Description? description;
-  final LocaleEnum? locale;
+  final String? description;
+  final String? locale;
 
-  LocaleElement({
+  Locale({
     this.id,
     this.name,
     this.description,
     this.locale,
   });
 
-  factory LocaleElement.fromJson(Map<String, dynamic> json) => LocaleElement(
+  factory Locale.fromJson(Map<String, dynamic> json) => Locale(
         id: json["id"],
         name: json["name"],
-        description: descriptionValues.map[json["description"]],
-        locale: localeEnumValues.map[json["locale"]]!,
+        description: json["description"],
+        locale: json["locale"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "description": descriptionValues.reverse[description],
-        "locale": localeEnumValues.reverse[locale],
+        "description": description,
+        "locale": locale,
       };
 }
-
-enum Description {
-  BACON_BURGER_WITH_CHEESE_SO_TASTY,
-  CHAMP_BURGER_WITH_CHIPS_HALAL_VERY_TASTY_TO_TASTE,
-  EMPTY
-}
-
-final descriptionValues = EnumValues({
-  "Bacon burger with cheese so tasty":
-      Description.BACON_BURGER_WITH_CHEESE_SO_TASTY,
-  "Champ burger with chips halal very tasty to taste":
-      Description.CHAMP_BURGER_WITH_CHIPS_HALAL_VERY_TASTY_TO_TASTE,
-  "": Description.EMPTY
-});
-
-enum LocaleEnum { EN }
-
-final localeEnumValues = EnumValues({"en": LocaleEnum.EN});
 
 class Discount {
   final int? id;
@@ -284,7 +190,7 @@ class Discount {
   final int? userId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final List<LocaleElement>? locales;
+  final List<Locale>? locales;
 
   Discount({
     this.id,
@@ -317,8 +223,8 @@ class Discount {
             : DateTime.parse(json["updated_at"]),
         locales: json["locales"] == null
             ? []
-            : List<LocaleElement>.from(
-                json["locales"]!.map((x) => LocaleElement.fromJson(x))),
+            : List<Locale>.from(
+                json["locales"]!.map((x) => Locale.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -360,7 +266,6 @@ class Media {
     this.userId,
     this.slug,
   });
-
   factory Media.fromJson(Map<String, dynamic> json) => Media(
         id: json["id"],
         createdAt: json["created_at"] == null
@@ -390,17 +295,17 @@ class Media {
       };
 }
 
-class PriceModel {
+class Price {
   final int? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final num? price;
+  final int? price;
   final String? priceableType;
   final int? priceableId;
   final int? userId;
-  final List<LocaleElement>? locales;
+  final List<Locale>? locales;
 
-  PriceModel({
+  Price({
     this.id,
     this.createdAt,
     this.updatedAt,
@@ -411,7 +316,7 @@ class PriceModel {
     this.locales,
   });
 
-  factory PriceModel.fromJson(Map<String, dynamic> json) => PriceModel(
+  factory Price.fromJson(Map<String, dynamic> json) => Price(
         id: json["id"],
         createdAt: json["created_at"] == null
             ? null
@@ -425,8 +330,8 @@ class PriceModel {
         userId: json["user_id"],
         locales: json["locales"] == null
             ? []
-            : List<LocaleElement>.from(
-                json["locales"]!.map((x) => LocaleElement.fromJson(x))),
+            : List<Locale>.from(
+                json["locales"]!.map((x) => Locale.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -442,34 +347,3 @@ class PriceModel {
             : List<dynamic>.from(locales!.map((x) => x.toJson())),
       };
 }
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
-}
-
-class ImageTextModel {
-  final String imageUrl;
-  final String text;
-
-  ImageTextModel({required this.imageUrl, required this.text});
-}
-
-List<ImageTextModel> data = [
-  ImageTextModel(imageUrl: 'assets/images/food/1.jpg', text: 'Burger'),
-  ImageTextModel(imageUrl: 'assets/images/food-sm/3.jpeg', text: 'Pizza'),
-  ImageTextModel(imageUrl: 'assets/images/food/sandwich.png', text: 'Sandwich'),
-  ImageTextModel(imageUrl: 'assets/images/food/noodles.png', text: 'Dish'),
-  ImageTextModel(
-      imageUrl: 'assets/images/food/ice_cream.png', text: 'Desserts'),
-  ImageTextModel(imageUrl: 'assets/images/food/6.jpg', text: 'Fruits'),
-  ImageTextModel(imageUrl: 'assets/images/food/cola.png', text: 'Drinks'),
-  // Add more instances as needed
-];

@@ -1,5 +1,6 @@
 import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
+import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 
 import '../../../../core/errors/failure.dart';
 
@@ -23,7 +24,7 @@ class GetCategoriesDataFailureState extends HomeState {
 class GetItemsDataLoadingState extends HomeState {}
 
 class GetItemsDataSuccessState extends HomeState {
-  final ItemModel item;
+  final ItemDetailsModel item;
   GetItemsDataSuccessState(this.item);
 }
 

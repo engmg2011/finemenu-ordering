@@ -2,6 +2,7 @@ class AppEndPoints {
   static const String baseUrl = 'http://api.finemenu.net/api/';
   static const String category = 'categories';
   static const String item = 'users/1/items';
+  static String itemById(int id) => 'items/$id';
   static const String order = 'orders';
   static String restaurantWithId(int id) => 'webapp/restaurant/$id';
   static const String bearerToken =

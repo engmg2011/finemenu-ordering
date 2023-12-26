@@ -1,5 +1,4 @@
 import 'package:finemenu/core/constant/colors.dart';
-import 'package:finemenu/features/webapp/view/widgets/custom_item_image_view.dart';
 import 'package:flutter/material.dart';
 
 class OrderListView extends StatelessWidget {
@@ -26,7 +25,10 @@ class OrderListView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomItemImage(imageUrl: imageUrl),
+            Image.network(
+              imageUrl,
+              width: 50,
+            ),
             const SizedBox(
               width: 12,
             ),

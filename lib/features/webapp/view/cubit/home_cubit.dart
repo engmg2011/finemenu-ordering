@@ -1,9 +1,8 @@
 import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
-import 'package:finemenu/features/webapp/data/models/price.dart';
+import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/repositories/base_webapp_repository.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -12,8 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final BaseWebAppRepository _webAppRepository;
   late Category categoryModel;
-  late ItemModel itemModel;
-  Price? lowestPrice;
+  late ItemDetailsModel itemModelDetails;
 
 //_item.media[0].src
   void getCategoriesData() async {
@@ -25,11 +23,11 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  void getItemsData() async {
+  void getItemsDetails(int id) async {
     emit(GetItemsDataLoadingState());
-    var result = await _webAppRepository.getItemsData();
+    var result = await _webAppRepository.getItemsDetails(id);
     result.fold((l) => emit(GetItemsDataFailureState(l)), (r) {
-      itemModel = r;
+      itemModelDetails = r;
       emit(GetItemsDataSuccessState(r));
     });
   }

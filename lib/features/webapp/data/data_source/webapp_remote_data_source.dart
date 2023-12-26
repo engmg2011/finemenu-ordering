@@ -3,6 +3,7 @@ import 'package:finemenu/core/constant/end_points.dart';
 import 'package:finemenu/core/service/api_service.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
 import 'package:finemenu/features/webapp/data/models/category.dart';
+import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +27,11 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
   }
 
   @override
-  Future<ItemModel> getItemsData() async {
+  Future<ItemDetailsModel> getItemsDetails(int id) async {
     Response response = await apiService.get(
-        endPoint: AppEndPoints.baseUrl + AppEndPoints.item);
+        endPoint: AppEndPoints.baseUrl + AppEndPoints.itemById(id));
     if (response.statusCode == 200) {
-      ItemModel data = ItemModel.fromJson(response.data);
+      ItemDetailsModel data = ItemDetailsModel.fromJson(response.data);
       return data;
     } else {
       debugPrint('Response ===> ${response.data}');

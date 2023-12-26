@@ -4,6 +4,7 @@ import 'package:finemenu/core/errors/server_failure.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
 import 'package:finemenu/features/webapp/data/models/category.dart';
 import 'package:finemenu/features/webapp/data/models/category_model.dart';
+import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/repositories/base_webapp_repository.dart';
 
 class WebAppRepository implements BaseWebAppRepository {
@@ -22,9 +23,9 @@ class WebAppRepository implements BaseWebAppRepository {
   }
 
   @override
-  Future<Either<Failure, ItemModel>> getItemsData() async {
+  Future<Either<Failure, ItemDetailsModel>> getItemsDetails(int id) async {
     try {
-      final getItems = await _dataSource.getItemsData();
+      final getItems = await _dataSource.getItemsDetails(id);
       return Right(getItems);
     } on Exception catch (e) {
       return Left(ServerError(e.toString()));
