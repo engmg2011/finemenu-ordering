@@ -33,8 +33,10 @@ class HomeScreen extends StatelessWidget {
               if (state is GetDataLoadingState) {
                 const Center(child: CircularProgressIndicator());
               } else if (state is GetDataCategorySuccessState) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const FineMenuScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FineMenuScreen()));
               }
             },
             builder: (context, state) {

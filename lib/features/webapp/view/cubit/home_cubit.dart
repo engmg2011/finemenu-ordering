@@ -10,9 +10,42 @@ class HomeCubit extends Cubit<HomeState> {
 
   final BaseWebAppRepository _webAppRepository;
   late CategoryModel categoryModel;
-  late ItemDetailsModel itemModelDetails;   List<ItemDetailsModel> itemModelDetailsList=[];
- List<Addon> countPrice=[];
+  late ItemDetailsModel itemModelDetails;
+  List<ItemDetailsModel> itemModelDetailsList = [];
+  num sizePrice = 0;
+
+  List<Addon> countPrice = [];
+  num sum = 0;
+  void sumPrice() {
+    sum = 0;
+    countPrice.forEach((element) {
+      sum += element.price!;
+    });
+    sum = sum + sizePrice;
+    print(sum);
+    emit(SumPriceState());
+  }
+  // void addItemToCart(Addon item) {
+  //   countPrice.add(item);
+  //   sumPrice();
+  //   emit(AddItemToCartState());
+  // }
+  //
+  // void removeItemFromCart(Addon item) {
+  //   countPrice.remove(item);
+  //   sumPrice();
+  //   emit(RemoveItemFromCartState());
+  // }
+
+//   void clearCart() {
+//     countPrice.clear();
+//     sumPrice();
+//     emit(ClearCartState());
+// }
+  //itemModelDetailsList.add(it
+
 //_item.media[0].src
+
   void getCategoriesData() async {
     emit(GetCategoriesDataLoadingState());
     var result = await _webAppRepository.getCategoriesData();

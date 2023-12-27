@@ -2,8 +2,6 @@ import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
-import 'package:finemenu/features/webapp/view/pages/test_item_details.dart';
-import 'package:finemenu/features/webapp/view/widgets/choose_additive_item_vew.dart';
 import 'package:finemenu/features/webapp/view/widgets/custom_big_button_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +16,8 @@ class DetailsItemView extends StatefulWidget {
   @override
   State<DetailsItemView> createState() => _DetailsItemViewState();
 }
+
+int selectItemSize = 0;
 
 class _DetailsItemViewState extends State<DetailsItemView> {
   @override
@@ -62,60 +62,6 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     const Text(
-                    //       "200KDW",
-                    //       style: TextStyle(
-                    //           fontSize: 22,
-                    //           fontWeight: FontWeight.bold,
-                    //           color: whiteclr),
-                    //     ),
-                    //     // Row(
-                    //     //   children: [
-                    //     //     Container(
-                    //     //       height: Utils.getScreenSize().height * 0.050,
-                    //     //       width: Utils.getScreenSize().width * 0.08,
-                    //     //       decoration: const BoxDecoration(
-                    //     //           color: lbackgroundclr,
-                    //     //           shape: BoxShape.circle),
-                    //     //       child: const Center(
-                    //     //         child: Icon(
-                    //     //           Icons.remove,
-                    //     //           color: whiteclr,
-                    //     //         ),
-                    //     //       ),
-                    //     //     ),
-                    //     //     SizedBox(
-                    //     //       width: Utils.getScreenSize().width * 0.04,
-                    //     //     ),
-                    //     //     const Text(
-                    //     //       "1",
-                    //     //       style: TextStyle(
-                    //     //           fontSize: 22,
-                    //     //           color: whiteclr,
-                    //     //           fontWeight: FontWeight.bold),
-                    //     //     ),
-                    //     //     SizedBox(
-                    //     //       width: Utils.getScreenSize().width * 0.04,
-                    //     //     ),
-                    //     //     Container(
-                    //     //       height: Utils.getScreenSize().height * 0.050,
-                    //     //       width: Utils.getScreenSize().width * 0.08,
-                    //     //       decoration: const BoxDecoration(
-                    //     //           color: lbackgroundclr,
-                    //     //           shape: BoxShape.circle),
-                    //     //       child: const Center(
-                    //     //           child: Icon(
-                    //     //         Icons.add,
-                    //     //         color: whiteclr,
-                    //     //       )),
-                    //     //     )
-                    //     //   ],
-                    //     // )
-                    //   ],
-                    // ),
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.006,
                     ),
@@ -133,15 +79,77 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                       height: Utils.getScreenSize().height * 0.09,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
+                        itemCount: cubit.itemModelDetails.prices!.length,
                         itemBuilder: (context, index) {
-                          return ItemPagePrices(
-                            Size: cubit.itemModelDetails.prices![index]
-                                    .locales![0].name ??
-                                "",
-                            price:
-                                cubit.itemModelDetails.prices![index].price ??
-                                    0,
+                          return GestureDetector(
+                            onTap: () {
+                              selectItemSize = index;
+                              setState(() {
+                                cubit.sizePrice = cubit.itemModelDetails!
+                                        .prices![selectItemSize].price! ??
+                                    0;
+                              });
+                            },
+                            child: Container(
+                              width: 100.0, // Adjust the width as needed
+                              margin: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: selectItemSize == index
+                                    ? primaryclr
+                                    : Colors.grey,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Center(
+                                  child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (selectItemSize == index)
+                                    const Icon(
+                                      Icons.check,
+                                      color: whiteclr,
+                                      size: 30,
+                                    ),
+                                  SizedBox(
+                                    width: Utils.getScreenSize().width * 0.01,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                          cubit.itemModelDetails.prices![index]
+                                                  .locales![0].name ??
+                                              "",
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12)),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Wrap(
+                                        children: [
+                                          Text(
+                                              cubit.itemModelDetails
+                                                      .prices![index].price
+                                                      .toString() ??
+                                                  "",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12)),
+                                          const Text(' KWD',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  height: 1.4)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                            ),
                           );
                         },
                         separatorBuilder: (context, index) {
@@ -149,7 +157,6 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                             width: Utils.getScreenSize().height * 0.015,
                           );
                         },
-                        itemCount: cubit.itemModelDetails.prices!.length,
                       ),
                     ),
                     const Text(
@@ -164,44 +171,46 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                       height: Utils.getScreenSize().height * 0.01,
                     ),
                     Column(
-                      children:cubit.itemModelDetails.addons!.map((e){
+                      children: cubit.itemModelDetails.addons!.map((e) {
                         return CheckboxListTile(
-                            title: Text(e.price.toString()),
+                            activeColor: primaryclr,
+                            checkColor: Colors.white,
+                            title: RichText(
+                              text: TextSpan(
+                                text: e.locales![0].name!,
+                                style: TextStyle(color: whiteclr),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: "        ${e.price}",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: whiteclr)),
+                                ],
+                              ),
+                            ),
                             value: cubit.countPrice.contains(e),
-                            onChanged: (value){
+                            onChanged: (value) {
                               setState(() {
-                                if(value ==true){
+                                if (value == true) {
                                   cubit.countPrice.add(e);
-                                }else{
+                                } else {
                                   cubit.countPrice.remove(e);
                                 }
                               });
                             });
-                        }).toList(),
+                      }).toList(),
                     ),
-                    // ListView.separated(
-                    //   shrinkWrap: true,
-                    //   itemBuilder: (context, index) {
-                    //     return ChooseAdditiveItemView(
-                    //         imagePath: "assets/images/food/creamcheese.png",
-                    //         additiveName: cubit.itemModelDetails.addons![index]
-                    //                 .locales![0].name
-                    //                 .toString() ??
-                    //             "",
-                    //         price:
-                    //             cubit.itemModelDetails.addons![index].price ??
-                    //                 0);
-                    //   },
-                    //   separatorBuilder: (context, index) {
-                    //     return SizedBox(
-                    //       height: Utils.getScreenSize().height * 0.015,
-                    //     );
-                    //   },
-                    //   itemCount: cubit.itemModelDetails.addons!.length,
-                    // ),
-                    const Center(
-                      child: CustomBigButton(
-                        textName: 'Add to card',
+                    Center(
+                      child: InkWell(
+                        onTap: () {
+                          cubit.sumPrice();
+                          print(cubit.sum);
+                          print(cubit.countPrice);
+                          print("ossssssssssssssss");
+                        },
+                        child: CustomBigButton(
+                          textName: "${cubit.sum} 'Add to card'",
+                        ),
                       ),
                     ),
                   ],
@@ -214,13 +223,3 @@ class _DetailsItemViewState extends State<DetailsItemView> {
     );
   }
 }
-
-//DetailsItemView(
-//  imagePath: asset(cubit.itemModelDetails.media![0].src.toString()),
-//  itemName: cubit.itemModelDetails.locales![0].name ?? "",
-//   itemDescription:
-//    cubit.itemModelDetails.locales![0].description ?? "",
-// itemPrice: "12.00",
-// );
-
-//ItemPagePrices()

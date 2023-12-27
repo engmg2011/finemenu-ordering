@@ -52,3 +52,11 @@ class GetDataFailureState extends HomeState {
   final Failure failure;
   GetDataFailureState(this.failure);
 }
+
+class SelectedSizeState extends HomeState {
+  SelectedSizeState();
+}
+
+class SumPriceState extends HomeState {
+  SumPriceState();
+}

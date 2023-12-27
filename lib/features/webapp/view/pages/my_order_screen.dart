@@ -26,16 +26,21 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) => const OrderListView(
-                imageUrl: "assets/images/food/burger.png",
-                itemName: "Chicken Burger",
-                itemPrice: 12.00,
+          itemBuilder: (context, index) => OrderListView(
+              // imageUrl: "assets/images/food/burger.png",
+              // itemName: "Chicken Burger",
+              // itemPrice: 12.00,
               ),
-          separatorBuilder: (context, index) => SizedBox(
-                height: 10,
+          separatorBuilder: (context, index) => const SizedBox(
+                height: 15,
               ),
           itemCount: 2),
-      bottomNavigationBar: const CustomBigButton(textName: "CheckOut (10 KWD)"),
+      bottomNavigationBar: InkWell(
+        onTap: () {},
+        child: const CustomBigButton(
+          textName: "CheckOut (10 KWD)",
+        ),
+      ),
     );
   }
 }
