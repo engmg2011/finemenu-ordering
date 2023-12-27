@@ -84,74 +84,74 @@ class ItemDetailsModel {
       };
 }
 
-class Addon {
-  final int? id;
-  final int? addonableId;
-  final String? addonableType;
-  final int? price;
-  final int? multiple;
-  final dynamic max;
-  final int? userId;
-  final dynamic parentId;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final List<Locale>? locales;
-
-  Addon({
-    this.id,
-    this.addonableId,
-    this.addonableType,
-    this.price,
-    this.multiple,
-    this.max,
-    this.userId,
-    this.parentId,
-    this.createdAt,
-    this.updatedAt,
-    this.locales,
-  });
-
-  factory Addon.fromRawJson(String str) => Addon.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Addon.fromJson(Map<String, dynamic> json) => Addon(
-        id: json["id"],
-        addonableId: json["addonable_id"],
-        addonableType: json["addonable_type"],
-        price: json["price"],
-        multiple: json["multiple"],
-        max: json["max"],
-        userId: json["user_id"],
-        parentId: json["parent_id"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        locales: json["locales"] == null
-            ? []
-            : List<Locale>.from(
-                json["locales"]!.map((x) => Locale.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "addonable_id": addonableId,
-        "addonable_type": addonableType,
-        "price": price,
-        "multiple": multiple,
-        "max": max,
-        "user_id": userId,
-        "parent_id": parentId,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "locales": locales == null
-            ? []
-            : List<dynamic>.from(locales!.map((x) => x.toJson())),
-      };
-}
+// class Addon {
+//   final int? id;
+//   final int? addonableId;
+//   final String? addonableType;
+//   final int? price;
+//   final int? multiple;
+//   final dynamic max;
+//   final int? userId;
+//   final dynamic parentId;
+//   final DateTime? createdAt;
+//   final DateTime? updatedAt;
+//   final List<Locale>? locales;
+//
+//   Addon({
+//     this.id,
+//     this.addonableId,
+//     this.addonableType,
+//     this.price,
+//     this.multiple,
+//     this.max,
+//     this.userId,
+//     this.parentId,
+//     this.createdAt,
+//     this.updatedAt,
+//     this.locales,
+//   });
+//
+//   factory Addon.fromRawJson(String str) => Addon.fromJson(json.decode(str));
+//
+//   String toRawJson() => json.encode(toJson());
+//
+//   factory Addon.fromJson(Map<String, dynamic> json) => Addon(
+//         id: json["id"],
+//         addonableId: json["addonable_id"],
+//         addonableType: json["addonable_type"],
+//         price: json["price"],
+//         multiple: json["multiple"],
+//         max: json["max"],
+//         userId: json["user_id"],
+//         parentId: json["parent_id"],
+//         createdAt: json["created_at"] == null
+//             ? null
+//             : DateTime.parse(json["created_at"]),
+//         updatedAt: json["updated_at"] == null
+//             ? null
+//             : DateTime.parse(json["updated_at"]),
+//         locales: json["locales"] == null
+//             ? []
+//             : List<Locale>.from(
+//                 json["locales"]!.map((x) => Locale.fromJson(x))),
+//       );
+//
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "addonable_id": addonableId,
+//         "addonable_type": addonableType,
+//         "price": price,
+//         "multiple": multiple,
+//         "max": max,
+//         "user_id": userId,
+//         "parent_id": parentId,
+//         "created_at": createdAt?.toIso8601String(),
+//         "updated_at": updatedAt?.toIso8601String(),
+//         "locales": locales == null
+//             ? []
+//             : List<dynamic>.from(locales!.map((x) => x.toJson())),
+//       };
+// }
 
 class Locale {
   final int? id;

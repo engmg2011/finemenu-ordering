@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   final BaseWebAppRepository _webAppRepository;
   late CategoryModel categoryModel;
   late ItemDetailsModel itemModelDetails;   List<ItemDetailsModel> itemModelDetailsList=[];
- List<ItemDetailsModel> countPrice=[];
+ List<Addon> countPrice=[];
 //_item.media[0].src
   void getCategoriesData() async {
     emit(GetCategoriesDataLoadingState());

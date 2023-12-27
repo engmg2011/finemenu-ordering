@@ -163,22 +163,22 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                     SizedBox(
                       height: Utils.getScreenSize().height * 0.01,
                     ),
-                    // Column(
-                    //   children:cubit.itemModelDetails.addons!.map((e){
-                    //     return CheckboxListTile(
-                    //         title: Text(e.price.toString()),
-                    //         value: cubit.countPrice.contains(e),
-                    //         onChanged: (value){
-                    //           setState(() {
-                    //             if(value ==true){
-                    //               cubit.countPrice.remove(e);
-                    //             }else{
-                    //               cubit.countPrice.add(e);
-                    //             }
-                    //           });
-                    //         });
-                    //     }).toList(),
-                    // ),
+                    Column(
+                      children:cubit.itemModelDetails.addons!.map((e){
+                        return CheckboxListTile(
+                            title: Text(e.price.toString()),
+                            value: cubit.countPrice.contains(e),
+                            onChanged: (value){
+                              setState(() {
+                                if(value ==true){
+                                  cubit.countPrice.add(e);
+                                }else{
+                                  cubit.countPrice.remove(e);
+                                }
+                              });
+                            });
+                        }).toList(),
+                    ),
                     // ListView.separated(
                     //   shrinkWrap: true,
                     //   itemBuilder: (context, index) {
