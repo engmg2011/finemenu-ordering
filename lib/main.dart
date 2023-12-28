@@ -1,7 +1,8 @@
+import 'package:finemenu/core/config/app_bloc_observer.dart';
 import 'package:finemenu/core/service/api_service.dart';
 import 'package:finemenu/features/webapp/data/data_source/webapp_remote_data_source.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
-import 'package:finemenu/features/webapp/view/pages/my_order_screen.dart';
+import 'package:finemenu/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,6 +11,7 @@ import 'features/webapp/data/repositories/webapp_repository.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = const AppBlocObserver();
   runApp(const MyApp());
 }
 
@@ -24,10 +26,10 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeCubit(WebAppRepository(
                 WebAppRemoteDataSource(apiService: ApiService(dioSetUp()))))),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Your App Title',
-        home: MyOrderScreen(),
+        home: HomeScreen(),
       ),
     );
     ;

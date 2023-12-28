@@ -41,9 +41,7 @@ class HomeCubit extends Cubit<HomeState> {
 //     countPrice.clear();
 //     sumPrice();
 //     emit(ClearCartState());
-// }
-  //itemModelDetailsList.add(it
-
+// }//itemModelDetailsList.add(it
 //_item.media[0].src
 
   void getCategoriesData() async {
@@ -65,13 +63,13 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  List<CategoryModel> categoriesList(menu) {
-    final List<CategoryModel> categoriesObjs = [];
-    menu['categories'].forEach((category) {
-      categoriesObjs.add(CategoryModel.fromJson(category));
-    });
-    return categoriesObjs;
-  }
+  // List<CategoryModel> categoriesList(menu) {
+  //   final List<CategoryModel> categoriesObjs = [];
+  //   menu['categories'].forEach((category) {
+  //     categoriesObjs.add(CategoryModel.fromJson(category));
+  //   });
+  //   return categoriesObjs;
+  // }
 
   List<CategoryModel> categoriesssssList = [];
   Future<void> getData(int id) async {

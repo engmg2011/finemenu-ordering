@@ -74,8 +74,6 @@ class ListItemView extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const DetailScreen()));
-                    } else if (state is GetItemsDataLoadingState) {
-                      const Center(child: CircularProgressIndicator());
                     }
                   },
                   builder: (context, state) {
