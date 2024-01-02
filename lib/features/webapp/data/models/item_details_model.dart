@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'category_model.dart';
 
 class ItemDetailsModel {

@@ -31,15 +31,15 @@ class WebAppRepository implements BaseWebAppRepository {
     }
   }
 
-  // @override
-  // Future<Either<Failure, bool>> sendOrder(dynamic order) async {
-  //   try {
-  //     final sendOrder = await _dataSource.sendOrder(order);
-  //     return Right(sendOrder);
-  //   } on Exception catch (e) {
-  //     return Left(ServerError(e.toString()));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, bool>> sendOrder(dynamic order) async {
+    try {
+      final sendOrder = await _dataSource.sendOrder(order);
+      return Right(sendOrder);
+    } on Exception catch (e) {
+      return Left(ServerError(e.toString()));
+    }
+  }
 
   @override
   Future<Either<Failure, List<CategoryModel>>> getRestaurantData(int id) async {

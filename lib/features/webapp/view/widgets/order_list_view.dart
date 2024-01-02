@@ -74,6 +74,16 @@ import 'package:flutter/material.dart';
 import '../../../../core/constant/colors.dart';
 
 class OrderListView extends StatefulWidget {
+  OrderListView({
+    required this.itemName,
+    required this.itemSize,
+    required this.itemPrice,
+    required this.onDelete,
+  });
+  final String itemName;
+  final String itemSize;
+  final num itemPrice;
+  final VoidCallback onDelete;
   @override
   _OrderListViewState createState() => _OrderListViewState();
 }
@@ -101,33 +111,37 @@ class _OrderListViewState extends State<OrderListView> {
       elevation: 4.0,
       margin: EdgeInsets.all(16.0),
       child: ListTile(
-        title: Text('Title'),
-        subtitle: Text('Subtitle'),
+        title: Text(widget.itemName,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        subtitle: Text(widget.itemSize),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Minus button
             IconButton(
-              icon: Icon(Icons.remove),
+              icon: const Icon(Icons.remove),
               onPressed: decrementCounter,
             ),
             // Counter
             Text('$counter',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
+                  fontSize: 18.0,
                 )),
             // Plus button
             IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: incrementCounter,
             ),
+            Text((counter * widget.itemPrice).toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                )),
+
             // Delete icon
             GestureDetector(
-              onTap: () {
-                // Add your delete logic here
-                print('Delete tapped');
-              },
+              onTap: widget.onDelete,
               child: const Icon(
                 Icons.delete,
                 color: primaryclr,

@@ -2,11 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:finemenu/core/constant/end_points.dart';
 import 'package:finemenu/core/service/api_service.dart';
 import 'package:finemenu/features/webapp/data/data_source/base_webapp_data_source.dart';
-
 import 'package:finemenu/features/webapp/data/models/item_details_model.dart';
 import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:flutter/material.dart';
-
 import '../models/category_model.dart';
 
 class WebAppRemoteDataSource implements BaseWebAppDataSource {
@@ -40,18 +38,18 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
   }
 
   @override
-  // Future<bool> sendOrder(Order order) async {
-  //   Response response = await apiService.post(
-  //       endPoint: AppEndPoints.baseUrl + AppEndPoints.order,
-  //       data: order.toJson());
-  //   if (response.statusCode == 200) {
-  //     debugPrint("updatePrivacyPolicy  success");
-  //     return true;
-  //   } else {
-  //     debugPrint('Response ===> ${response.data}');
-  //     throw Exception();
-  //   }
-  // }
+  Future<bool> sendOrder(Order order) async {
+    Response response = await apiService.post(
+        endPoint: AppEndPoints.baseUrl + AppEndPoints.order,
+        data: order.toJson());
+    if (response.statusCode == 200) {
+      debugPrint("updatePrivacyPolicy  success");
+      return true;
+    } else {
+      debugPrint('Response ===> ${response.data}');
+      throw Exception();
+    }
+  }
 
   @override
   Future<List<CategoryModel>> getRestaurantData(int id) async {

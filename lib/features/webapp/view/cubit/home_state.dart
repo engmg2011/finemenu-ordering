@@ -35,28 +35,25 @@ class GetItemsDataFailureState extends HomeState {
 ////////////////////////////////////////////////////////////////
 class GetDataLoadingState extends HomeState {}
 
-class GetDataCategorySuccessState extends HomeState {
-  GetDataCategorySuccessState();
-}
-
-class GetDataRestaurantSuccessState extends HomeState {
-  GetDataRestaurantSuccessState();
-}
-
-class GetDataItemSuccessState extends HomeState {
-  final List<ItemModel> item;
-  GetDataItemSuccessState(this.item);
-}
+class GetDataCategorySuccessState extends HomeState {}
 
 class GetDataFailureState extends HomeState {
   final Failure failure;
   GetDataFailureState(this.failure);
 }
 
-class SelectedSizeState extends HomeState {
-  SelectedSizeState();
-}
-
+/////////////////////////////////////////////////////////////////////
 class SumPriceState extends HomeState {
   SumPriceState();
+}
+
+//////////////////////////////////////////////////////////////////////////
+class SendOrderLoadingState extends HomeState {}
+
+class SendOrderSuccessState extends HomeState {}
+
+class SendOrderFailureState extends HomeState {
+  final Failure failure;
+
+  SendOrderFailureState(this.failure);
 }

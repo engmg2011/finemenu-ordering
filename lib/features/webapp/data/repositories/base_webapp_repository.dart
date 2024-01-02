@@ -8,6 +8,6 @@ import '../models/category_model.dart';
 abstract class BaseWebAppRepository {
   Future<Either<Failure, CategoryModel>> getCategoriesData();
   Future<Either<Failure, ItemDetailsModel>> getItemsDetails(int id);
- // Future<Either<Failure, bool>> sendOrder(Order order);
+  Future<Either<Failure, bool>> sendOrder(Order order);
   Future<Either<Failure, List<CategoryModel>>> getRestaurantData(int id);
 }

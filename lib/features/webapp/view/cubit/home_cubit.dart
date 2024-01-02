@@ -4,6 +4,8 @@ import 'package:finemenu/features/webapp/data/repositories/base_webapp_repositor
 import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/order.dart';
+
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._webAppRepository) : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
@@ -63,6 +65,13 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  void sendOrder(dynamic order) async {
+    emit(SendOrderLoadingState());
+    var result = await _webAppRepository.sendOrder(order);
+    result.fold((l) => emit(SendOrderFailureState(l)), (r) {
+      emit(SendOrderSuccessState());
+    });
+  }
   // List<CategoryModel> categoriesList(menu) {
   //   final List<CategoryModel> categoriesObjs = [];
   //   menu['categories'].forEach((category) {
