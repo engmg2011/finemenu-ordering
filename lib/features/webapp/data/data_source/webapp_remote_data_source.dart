@@ -12,11 +12,12 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
 
   WebAppRemoteDataSource({required this.apiService});
   @override
-  Future<CategoryModel> getCategoriesData() async {
+  Future<List<CategoryModel>> getCategoriesData() async {
     Response response = await apiService.get(
         endPoint: AppEndPoints.baseUrl + AppEndPoints.category);
     if (response.statusCode == 200) {
-      CategoryModel data = CategoryModel.fromJson(response.data['data']);
+      List<CategoryModel> data = List<CategoryModel>.from(
+          (response.data['data']).map((e) => CategoryModel.fromJson(e)));
       return data;
     } else {
       debugPrint('Response ===> ${response.data}');
@@ -58,8 +59,7 @@ class WebAppRemoteDataSource implements BaseWebAppDataSource {
     );
     if (response.statusCode == 200) {
       List<CategoryModel> categories = List<CategoryModel>.from(
-          (response.data['categories'] as List)
-              .map((e) => CategoryModel.fromJson(e)));
+          (response.data['categories']).map((e) => CategoryModel.fromJson(e)));
 
       return categories;
     } else {

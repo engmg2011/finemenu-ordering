@@ -9,9 +9,10 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: backgroundclr,
       body: DetailsItemView(),
+
     );
   }
 }

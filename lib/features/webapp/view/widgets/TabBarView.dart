@@ -74,7 +74,8 @@ class _TabBarDemoState extends State<TabBarDemo>
                               ? "No Description"
                               : e.items![index].locales![0].description
                                   .toString(),
-                          price: 0,
+                            price:0,
+                           // price: e.items![index].prices![0].price ??0,
                         ),
                       );
                     },

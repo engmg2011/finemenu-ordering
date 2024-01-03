@@ -1,5 +1,6 @@
 import 'package:finemenu/core/constant/colors.dart';
 import 'package:finemenu/core/constant/constant.dart';
+import 'package:finemenu/features/webapp/data/models/order.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_cubit.dart';
 import 'package:finemenu/features/webapp/view/cubit/home_state.dart';
 import 'package:finemenu/features/webapp/view/pages/fine_menu_screen.dart';
@@ -71,7 +72,7 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                           height: Utils.getScreenSize().height * 0.006,
                         ),
                         Text(
-                          cubit.itemModelDetails.locales![0].description ?? "",
+                          cubit.itemModelDetails.locales![0].description.toString() ?? "",
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[400],
@@ -218,9 +219,16 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                               print(cubit.sum);
                               print(cubit.countPrice);
                               print("ossssssssssssssss");
+                              // cubit.prepareOrder(
+                              //     cubit.itemModelDetails, null, []);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const FineMenuScreen()));
                             },
-                            child: CustomBigButton(
-                              textName: "${cubit.sum} 'Add to card'",
+                            child: const CustomBigButton(
+                              textName: "Add to card",
+                              //${cubit.sum}
                             ),
                           ),
                         ),
@@ -230,6 +238,8 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                 ],
               ),
               Positioned(
+                top: 30,
+                left: 20,
                 child: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
@@ -238,8 +248,6 @@ class _DetailsItemViewState extends State<DetailsItemView> {
                           MaterialPageRoute(
                               builder: (context) => const FineMenuScreen()));
                     }),
-                top: 30,
-                left: 20,
               ),
             ],
           ),

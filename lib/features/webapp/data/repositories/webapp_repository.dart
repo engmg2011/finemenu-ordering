@@ -12,7 +12,7 @@ class WebAppRepository implements BaseWebAppRepository {
   WebAppRepository(this._dataSource);
 
   @override
-  Future<Either<Failure, CategoryModel>> getCategoriesData() async {
+  Future<Either<Failure, List<CategoryModel>>> getCategoriesData() async {
     try {
       final getCategories = await _dataSource.getCategoriesData();
       return Right(getCategories);

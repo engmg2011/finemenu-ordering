@@ -10,8 +10,6 @@ class HomeInitial extends HomeState {}
 class GetCategoriesDataLoadingState extends HomeState {}
 
 class GetCategoriesDataSuccessState extends HomeState {
-  final CategoryModel categoryModel;
-  GetCategoriesDataSuccessState(this.categoryModel);
 }
 
 class GetCategoriesDataFailureState extends HomeState {
@@ -56,4 +54,7 @@ class SendOrderFailureState extends HomeState {
   final Failure failure;
 
   SendOrderFailureState(this.failure);
+
 }
+///////////////////////////////////////////////////////
+class prepareOrderState extends HomeState {}

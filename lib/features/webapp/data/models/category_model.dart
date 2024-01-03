@@ -10,7 +10,7 @@ class CategoryModel {
   final dynamic parentId;
   final int? userId;
   final dynamic sort;
-  final List<ItemModel>? items;
+  final List<ItemDetailsModel>? items;
   final List<LocaleElement>? locales;
   final List<Media>? media;
 
@@ -41,8 +41,8 @@ class CategoryModel {
         sort: json["sort"],
         items: json["items"] == null
             ? []
-            : List<ItemModel>.from(
-                json["items"]!.map((x) => ItemModel.fromJson(x))),
+            : List<ItemDetailsModel>.from(
+                json["items"]!.map((x) => ItemDetailsModel.fromJson(x))),
         locales: json["locales"] == null
             ? []
             : List<LocaleElement>.from(
@@ -72,7 +72,7 @@ class CategoryModel {
       };
 }
 
-class ItemModel {
+class ItemDetailsModel {
   final int? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -83,9 +83,9 @@ class ItemModel {
   final List<Addon>? addons;
   final List<Discount>? discounts;
   final List<Media>? media;
-  final List<PriceModel>? prices;
+  late final List<PriceModel>? prices;
 
-  ItemModel({
+  ItemDetailsModel({
     this.id,
     this.createdAt,
     this.updatedAt,
@@ -99,7 +99,7 @@ class ItemModel {
     this.prices,
   });
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) => ItemModel(
+  factory ItemDetailsModel.fromJson(Map<String, dynamic> json) => ItemDetailsModel(
         id: json["id"],
         createdAt: json["created_at"] == null
             ? null
@@ -156,7 +156,7 @@ class ItemModel {
 }
 
 class Addon {
-  final int? id;
+  late final int? id;
   final int? addonableId;
   final String? addonableType;
   final double? price;
@@ -391,7 +391,7 @@ class Media {
 }
 
 class PriceModel {
-  final int? id;
+  late final int? id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final num? price;

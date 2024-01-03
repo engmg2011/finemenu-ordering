@@ -9,8 +9,8 @@ class OrderLine {
   int itemId;
   String? note;
   int count;
-  ItemModel item;
-  List<Price> prices = [];
+  ItemDetailsModel item;
+  List<PriceModel> prices = [];
   double? totalPrice;
   List<Addon> addons = [];
   List<Discount> discounts = [];
@@ -21,7 +21,7 @@ class OrderLine {
         totalPrice = data['totalPrice'],
         note = data['note'],
         count = data['count'],
-        item = ItemModel.fromJson(data['item']) {
+        item = ItemDetailsModel.fromJson(data['item']) {
     if (data['discounts'] != null) {
       data['discounts'].forEach(
           (dynamic discount) => {discounts.add(Discount.fromJson(discount))});
@@ -32,7 +32,7 @@ class OrderLine {
     }
     if (data['prices'] != null) {
       data['prices']
-          .forEach((dynamic price) => {prices.add(Price.fromJson(price))});
+          .forEach((dynamic price) => {prices.add(PriceModel.fromJson(price))});
     }
   }
 
@@ -46,6 +46,6 @@ class OrderLine {
         'discounts':
             discounts.map((Discount discount) => discount.toJson()).toList(),
         'addons': addons.map((Addon addon) => addon.toJson()).toList(),
-        'prices': prices.map((Price price) => price.toJson()).toList(),
+        'prices': prices.map((PriceModel price) => price.toJson()).toList(),
       };
 }

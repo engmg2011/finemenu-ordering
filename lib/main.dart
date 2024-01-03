@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Your App Title',
-        home: MyOrderScreen(),
+        home: HomeScreen(),
       ),
     );
     ;
